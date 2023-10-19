@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.dto.input.ModelDto;
+import web.development.dto.output.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
 import web.development.services.interfaces.ModelService;
@@ -34,12 +35,17 @@ public class ModelServiceImpl implements ModelService<Long> {
     }
 
     @Override
-    public List<ModelDto> findAll() {
-        return modelRepository.findAll().stream().map(e -> modelMapper.map(e, ModelDto.class)).collect(Collectors.toList());
+    public List<ModelOutputDto> findAll() {
+        return modelRepository.findAll().stream().map(e -> modelMapper.map(e, ModelOutputDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(Long id) {
         modelRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ModelOutputDto> findByBrandName(String name) {
+        return modelRepository.findByBrand_Name(name).stream().map(e -> modelMapper.map(e, ModelOutputDto.class)).collect(Collectors.toList());
     }
 }

@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.dto.input.UserDto;
+import web.development.dto.output.UserOutputDto;
 import web.development.models.entities.User;
 import web.development.repositories.UserRepository;
 import web.development.services.interfaces.UserService;
@@ -34,12 +35,17 @@ public class UserServiceImpl implements UserService<Long> {
     }
 
     @Override
-    public List<UserDto> findAll() {
-        return userRepository.findAll().stream().map(e -> modelMapper.map(e, UserDto.class)).collect(Collectors.toList());
+    public List<UserOutputDto> findAll() {
+        return userRepository.findAll().stream().map(e -> modelMapper.map(e, UserOutputDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserOutputDto> findUsersByActivity(Boolean isActive) {
+        return userRepository.findByIsActive(isActive).stream().map(e -> modelMapper.map(e, UserOutputDto.class)).collect(Collectors.toList());
     }
 }

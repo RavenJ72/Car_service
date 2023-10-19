@@ -11,7 +11,7 @@ public class Brand extends TimeBaseEntity {
     @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Model> models = new ArrayList<>();
 
     public Brand() {

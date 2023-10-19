@@ -4,10 +4,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.dto.input.OfferDto;
+import web.development.dto.output.OfferOutputDto;
 import web.development.models.entities.Offer;
 import web.development.repositories.OfferRepository;
 import web.development.services.interfaces.OfferService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +36,29 @@ public class OfferServiceImpl implements OfferService<Long> {
     }
 
     @Override
-    public List<OfferDto> findAll() {
-        return offerRepository.findAll().stream().map(e -> modelMapper.map(e, OfferDto.class)).collect(Collectors.toList());
+    public List<OfferOutputDto> findAll() {
+        return offerRepository.findAll().stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(Long id) {
         offerRepository.deleteById(id);
     }
+
+    @Override
+    public List<OfferOutputDto> findOffersByBrandName(String brandName) {
+        return offerRepository.findByModel_Brand_Name(brandName).stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OfferOutputDto> findOffersBySellerUsername(String username) {
+        return offerRepository.findBySeller_Username(username).stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OfferOutputDto> findOffersByPriceBetween(BigDecimal startPrice, BigDecimal endPrice) {
+        return offerRepository.findByPriceBetween(startPrice,endPrice).stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
+    }
+
+
 }

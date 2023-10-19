@@ -5,7 +5,7 @@ import web.development.dto.input.baseEntities.BaseEntityDto;
 import java.time.LocalDateTime;
 
 public class BrandDto extends BaseEntityDto {
-    private String name;
+    public String name;
 
     public BrandDto(Long id ,String name) {
         super(id);

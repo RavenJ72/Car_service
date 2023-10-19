@@ -1,6 +1,7 @@
 package web.development.services.interfaces;
 
 import web.development.dto.input.UserDto;
+import web.development.dto.output.UserOutputDto;
 import web.development.models.entities.User;
 
 import java.util.List;
@@ -12,7 +13,9 @@ public interface UserService<ID> {
 
     UserDto findById(ID id);  // Read
 
-    List<UserDto> findAll();  // Read
+    List<UserOutputDto> findAll();  // Read
 
     void deleteById(ID id);  // Delete
+
+    List<UserOutputDto> findUsersByActivity(Boolean isActive);
 }
