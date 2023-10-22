@@ -10,10 +10,11 @@ import web.development.repositories.ModelRepository;
 import web.development.services.interfaces.ModelService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelServiceImpl implements ModelService<Long> {
+public class ModelServiceImpl implements ModelService<UUID> {
 
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
@@ -30,7 +31,7 @@ public class ModelServiceImpl implements ModelService<Long> {
     }
 
     @Override
-    public ModelDto findById(Long id) {
+    public ModelDto findById(UUID id) {
         return modelMapper.map(modelRepository.findById(id).orElse(null), ModelDto.class);
     }
 
@@ -40,7 +41,7 @@ public class ModelServiceImpl implements ModelService<Long> {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         modelRepository.deleteById(id);
     }
 

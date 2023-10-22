@@ -4,6 +4,7 @@ import web.development.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.ModelCategory;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class ModelDto extends BaseEntityDto {
 
@@ -15,7 +16,7 @@ public class ModelDto extends BaseEntityDto {
     public BrandDto brand;
 
 
-    public ModelDto(Long id, String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
+    public ModelDto(UUID id, String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
         super(id);
         this.name = name;
         this.category = category;

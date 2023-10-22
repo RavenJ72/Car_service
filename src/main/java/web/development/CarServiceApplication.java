@@ -42,10 +42,6 @@ public class CarServiceApplication {
 		TypeMap<User, UserOutputDto> typeMapUser = modelMapper.createTypeMap(User.class, UserOutputDto.class);
 		typeMapUser.addMappings(m->m.map(src -> src.getRole().getId(), UserOutputDto::setRole_id));
 
-
-
-
-
 		return modelMapper;
 	}
 

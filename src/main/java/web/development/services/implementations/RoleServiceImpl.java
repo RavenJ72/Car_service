@@ -9,10 +9,11 @@ import web.development.repositories.RoleRepository;
 import web.development.services.interfaces.RoleService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl implements RoleService<Long> {
+public class RoleServiceImpl implements RoleService<UUID> {
 
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
@@ -29,7 +30,7 @@ public class RoleServiceImpl implements RoleService<Long> {
     }
 
     @Override
-    public RoleDto findById(Long id) {
+    public RoleDto findById(UUID id) {
         return modelMapper.map(roleRepository.findById(id).orElse(null), RoleDto.class);
     }
 
@@ -39,7 +40,7 @@ public class RoleServiceImpl implements RoleService<Long> {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         roleRepository.deleteById(id);
     }
 }

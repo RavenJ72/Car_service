@@ -1,20 +1,22 @@
 package web.development.dto.input.baseEntities;
 
-public class BaseEntityDto {
-    public Long id;
+import java.util.UUID;
 
-    public BaseEntityDto(Long id) {
+public class BaseEntityDto {
+    public UUID id;
+
+    public BaseEntityDto(UUID id) {
         this.id = id;
     }
 
     public BaseEntityDto() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 }

@@ -8,11 +8,12 @@ import web.development.repositories.BrandRepository;
 import web.development.services.interfaces.BrandService;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 
 @Service
-public class BrandServiceImpl implements BrandService<Long> {
+public class BrandServiceImpl implements BrandService<UUID> {
 
 
     private final BrandRepository brandRepository;
@@ -31,7 +32,7 @@ public class BrandServiceImpl implements BrandService<Long> {
     }
 
     @Override
-    public BrandDto findById(Long id) {
+    public BrandDto findById(UUID id) {
         return modelMapper.map(brandRepository.findById(id).orElse(null),BrandDto.class);
     }
 
@@ -41,7 +42,7 @@ public class BrandServiceImpl implements BrandService<Long> {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         brandRepository.deleteById(id);
     }
 }

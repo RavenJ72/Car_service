@@ -3,11 +3,12 @@ package web.development.dto.input;
 import web.development.dto.input.baseEntities.BaseEntityDto;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class BrandDto extends BaseEntityDto {
     public String name;
 
-    public BrandDto(Long id ,String name) {
+    public BrandDto(UUID id, String name) {
         super(id);
         this.name = name;
     }

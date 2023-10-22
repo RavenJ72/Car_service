@@ -6,6 +6,7 @@ import web.development.models.enums.TransmissionType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class OfferDto extends BaseEntityDto {
 
@@ -26,7 +27,7 @@ public class OfferDto extends BaseEntityDto {
     public ModelDto model;
     public UserDto seller;
 
-    public OfferDto(Long id, String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
+    public OfferDto(UUID id, String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
         super(id);
         this.description = description;
         this.engine = engine;

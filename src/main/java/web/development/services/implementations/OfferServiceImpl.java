@@ -11,10 +11,11 @@ import web.development.services.interfaces.OfferService;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class OfferServiceImpl implements OfferService<Long> {
+public class OfferServiceImpl implements OfferService<UUID> {
 
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;
@@ -31,7 +32,7 @@ public class OfferServiceImpl implements OfferService<Long> {
     }
 
     @Override
-    public OfferDto findById(Long id) {
+    public OfferDto findById(UUID id) {
         return modelMapper.map(offerRepository.findById(id).orElse(null), OfferDto.class);
     }
 
@@ -41,7 +42,7 @@ public class OfferServiceImpl implements OfferService<Long> {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(UUID id) {
         offerRepository.deleteById(id);
     }
 

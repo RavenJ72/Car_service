@@ -2,6 +2,8 @@ package web.development.dto.input;
 
 import web.development.dto.input.baseEntities.BaseEntityDto;
 
+import java.util.UUID;
+
 public class UserDto extends BaseEntityDto {
     public String username;
     public String password;
@@ -11,7 +13,7 @@ public class UserDto extends BaseEntityDto {
     public String imageUrl;
     public RoleDto role;
 
-    public UserDto(Long id, String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
+    public UserDto(UUID id, String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
         super(id);
         this.username = username;
         this.password = password;

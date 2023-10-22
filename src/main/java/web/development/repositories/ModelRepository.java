@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 import web.development.models.entities.Model;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Repository
-public interface ModelRepository extends JpaRepository<Model, Long>{
+public interface ModelRepository extends JpaRepository<Model, UUID>{
 
     List<Model> findByBrand_Name(String name);
 
