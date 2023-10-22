@@ -15,4 +15,7 @@ public interface BrandService<ID> {
     List<BrandDto> findAll();  // Read
 
     void deleteById(ID id);  // Delete
+
+    BrandDto findByName(String name); //Read
+
 }

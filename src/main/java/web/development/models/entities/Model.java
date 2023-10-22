@@ -33,14 +33,6 @@ public class Model extends TimeBaseEntity {
     public Model() {
     }
 
-    public Model(String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, Brand brand) {
-        this.name = name;
-        this.category = category;
-        this.imageUrl = imageUrl;
-        this.startYear = startYear;
-        this.endYear = endYear;
-        this.brand = brand;
-    }
 
     public String getName() {
         return name;

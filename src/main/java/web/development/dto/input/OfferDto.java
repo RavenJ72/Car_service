@@ -27,8 +27,7 @@ public class OfferDto extends BaseEntityDto {
     public ModelDto model;
     public UserDto seller;
 
-    public OfferDto(UUID id, String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
-        super(id);
+    public OfferDto( String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;

@@ -8,8 +8,7 @@ import java.util.UUID;
 public class BrandDto extends BaseEntityDto {
     public String name;
 
-    public BrandDto(UUID id, String name) {
-        super(id);
+    public BrandDto( String name) {
         this.name = name;
     }
 

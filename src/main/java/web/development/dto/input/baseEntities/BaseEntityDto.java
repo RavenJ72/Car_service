@@ -5,9 +5,6 @@ import java.util.UUID;
 public class BaseEntityDto {
     public UUID id;
 
-    public BaseEntityDto(UUID id) {
-        this.id = id;
-    }
 
     public BaseEntityDto() {
     }

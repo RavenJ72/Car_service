@@ -16,8 +16,7 @@ public class ModelDto extends BaseEntityDto {
     public BrandDto brand;
 
 
-    public ModelDto(UUID id, String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
-        super(id);
+    public ModelDto( String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;

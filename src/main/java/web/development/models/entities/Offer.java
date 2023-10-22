@@ -3,7 +3,6 @@ package web.development.models.entities;
 import jakarta.persistence.*;
 import web.development.models.baseEntities.TimeBaseEntity;
 import web.development.models.converters.EngineTypeConverter;
-import web.development.models.converters.RoleTypeConverter;
 import web.development.models.converters.TransmissionTypeConverter;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
@@ -49,17 +48,6 @@ public class Offer extends TimeBaseEntity {
     public Offer() {
     }
 
-    public Offer(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, Model model, User seller) {
-        this.description = description;
-        this.engine = engine;
-        this.imageUrl = imageUrl;
-        this.mileage = mileage;
-        this.price = price;
-        this.transmission = transmission;
-        this.year = year;
-        this.model = model;
-        this.seller = seller;
-    }
 
     public String getDescription() {
         return description;

@@ -13,8 +13,7 @@ public class UserDto extends BaseEntityDto {
     public String imageUrl;
     public RoleDto role;
 
-    public UserDto(UUID id, String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
-        super(id);
+    public UserDto( String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

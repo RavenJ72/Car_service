@@ -32,24 +32,12 @@ public class User extends TimeBaseEntity {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "seller",orphanRemoval = true, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "seller",orphanRemoval = true, cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
     private List<Offer> offers = new ArrayList<>();
-
-    public User(String username, String password,
-                String firstName, String lastName, Boolean isActive, String imageUrl, Role role) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.isActive = isActive;
-        this.imageUrl = imageUrl;
-        this.role = role;
-    }
 
     public User() {
 
     }
-
     public String getUsername() {
         return username;
     }

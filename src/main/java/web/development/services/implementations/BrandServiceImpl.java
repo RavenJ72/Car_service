@@ -45,4 +45,9 @@ public class BrandServiceImpl implements BrandService<UUID> {
     public void deleteById(UUID id) {
         brandRepository.deleteById(id);
     }
+
+    @Override
+    public BrandDto findByName(String name) {
+        return modelMapper.map(brandRepository.findAllByName(name).stream().findFirst().orElse(null),BrandDto.class);
+    }
 }

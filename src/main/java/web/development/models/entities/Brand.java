@@ -11,13 +11,13 @@ public class Brand extends TimeBaseEntity {
     @Column(name = "name", length = 255, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "brand", cascade = CascadeType.REMOVE, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Model> models = new ArrayList<>();
 
     public Brand() {
     }
 
-    public Brand(String name, List<Model> models) {
+    public Brand(String name) {
         this.name = name;
     }
 

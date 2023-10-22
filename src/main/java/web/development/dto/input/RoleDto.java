@@ -8,8 +8,7 @@ import java.util.UUID;
 public class RoleDto extends BaseEntityDto {
     public RoleType role;
 
-    public RoleDto(UUID id, RoleType role) {
-        super(id);
+    public RoleDto( RoleType role) {
         this.role = role;
     }
 
