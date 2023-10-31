@@ -3,10 +3,13 @@ package web.development.services.dto.input;
 import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.RoleType;
 
-public class RoleDto extends BaseEntityDto {
-    public RoleType role;
+import jakarta.validation.constraints.NotNull;
 
-    public RoleDto( RoleType role) {
+public class RoleDto extends BaseEntityDto {
+    @NotNull(message = "Role cannot be null")
+    private RoleType role;
+
+    public RoleDto(RoleType role) {
         this.role = role;
     }
 

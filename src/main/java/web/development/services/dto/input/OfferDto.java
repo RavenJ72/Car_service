@@ -4,28 +4,42 @@ import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public class OfferDto extends BaseEntityDto {
+    @NotBlank(message = "Description cannot be blank")
+    private String description;
 
-    public String description;
+    @NotNull(message = "Engine type cannot be null")
+    private EngineType engine;
 
-    public EngineType engine;
+    @NotBlank(message = "Image URL cannot be blank")
+    private String imageUrl;
 
-    public String imageUrl;
+    @Positive(message = "Mileage must be a positive number")
+    private Integer mileage;
 
-    public Integer mileage;
+    @NotNull(message = "Price cannot be null")
+    @Positive(message = "Price must be a positive number")
+    private BigDecimal price;
 
-    public BigDecimal price;
+    @NotNull(message = "Transmission type cannot be null")
+    private TransmissionType transmission;
 
-    public TransmissionType transmission;
+    @Positive(message = "Year must be a positive number")
+    private Integer year;
 
-    public Integer year;
+    @NotNull(message = "Model cannot be null")
+    private ModelDto model;
 
-    public ModelDto model;
-    public UserDto seller;
+    @NotNull(message = "Seller cannot be null")
+    private UserDto seller;
 
-    public OfferDto( String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
+    public OfferDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -112,4 +126,3 @@ public class OfferDto extends BaseEntityDto {
         this.seller = seller;
     }
 }
-

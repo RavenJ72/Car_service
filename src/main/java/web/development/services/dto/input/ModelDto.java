@@ -3,17 +3,31 @@ package web.development.services.dto.input;
 import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.ModelCategory;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 public class ModelDto extends BaseEntityDto {
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
+    private String name;
 
-    public String name;
-    public ModelCategory category;
-    public String imageUrl;
-    public Integer startYear;
-    public Integer endYear;
-    public BrandDto brand;
+    @NotNull(message = "Category cannot be null")
+    private ModelCategory category;
 
+    @NotBlank(message = "Image URL cannot be blank")
+    private String imageUrl;
 
-    public ModelDto( String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
+    @NotNull(message = "Start year cannot be null")
+    private Integer startYear;
+
+    @NotNull(message = "End year cannot be null")
+    private Integer endYear;
+
+    @NotNull(message = "Brand cannot be null")
+    private BrandDto brand;
+
+    public ModelDto(String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;

@@ -2,10 +2,15 @@ package web.development.services.dto.input;
 
 import web.development.services.dto.input.baseEntities.BaseEntityDto;
 
-public class BrandDto extends BaseEntityDto {
-    public String name;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-    public BrandDto( String name) {
+public class BrandDto extends BaseEntityDto {
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
+    private String name;
+
+    public BrandDto(String name) {
         this.name = name;
     }
 

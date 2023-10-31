@@ -1,11 +1,14 @@
 package web.development.services.implementations;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.services.dto.input.BrandDto;
 import web.development.models.entities.Brand;
 import web.development.repositories.BrandRepository;
 import web.development.services.interfaces.BrandService;
+import web.development.util.ValidationUtilImpl;
+import jakarta.validation.ConstraintViolation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,19 +19,37 @@ public class BrandServiceImpl implements BrandService<String> {
 
 
     private final BrandRepository brandRepository;
-
     private final ModelMapper modelMapper;
-
-    public BrandServiceImpl(BrandRepository brandRepository, ModelMapper modelMapper) {
+    private final ValidationUtilImpl validationUtil;
+    @Autowired
+    public BrandServiceImpl(BrandRepository brandRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil) {
         this.brandRepository = brandRepository;
         this.modelMapper = modelMapper;
+        this.validationUtil = validationUtil;
     }
 
 
     @Override
     public BrandDto save(String brandName) {
         BrandDto brand = new BrandDto(brandName);
-        return modelMapper.map(brandRepository.saveAndFlush(modelMapper.map(brand,Brand.class)),BrandDto.class);
+
+        if (!this.validationUtil.isValid(brand)) {
+            this.validationUtil
+                    .violations(brand)
+                    .stream()
+                    .map(ConstraintViolation::getMessage)
+                    .forEach(System.out::println);
+
+        } else {
+            try {
+                return modelMapper.map(brandRepository.saveAndFlush(modelMapper.map(brand,Brand.class)),BrandDto.class);
+            } catch (Exception e) {
+                System.out.println("Some thing went wrong!");
+            }
+        }
+
+        return null;
+
     }
 
     @Override

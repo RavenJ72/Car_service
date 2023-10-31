@@ -1,16 +1,19 @@
 package web.development.services.implementations;
 
+import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.Brand;
+import web.development.services.dto.input.BrandDto;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.output.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
 import web.development.services.interfaces.ModelService;
+import web.development.util.ValidationUtilImpl;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,16 +21,35 @@ public class ModelServiceImpl implements ModelService<String> {
 
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
+    private final ValidationUtilImpl validationUtil;
 
     @Autowired
-    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper) {
+    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil) {
         this.modelRepository = modelRepository;
         this.modelMapper = modelMapper;
+        this.validationUtil = validationUtil;
     }
 
     @Override
     public ModelDto save(ModelDto model) {
-        return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
+
+        if (!this.validationUtil.isValid(model)) {
+            this.validationUtil
+                    .violations(model)
+                    .stream()
+                    .map(ConstraintViolation::getMessage)
+                    .forEach(System.out::println);
+
+        } else {
+            try {
+                return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
+            } catch (Exception e) {
+                System.out.println("Some thing went wrong!");
+            }
+        }
+
+        return null;
+
     }
 
     @Override

@@ -16,5 +16,7 @@ public interface UserService<ID> {
 
     void deleteById(ID id);  // Delete
 
+    UserDto findByUsername(String username);
+
     List<UserOutputDto> findUsersByActivity(Boolean isActive);
 }

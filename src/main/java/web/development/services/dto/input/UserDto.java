@@ -1,17 +1,33 @@
 package web.development.services.dto.input;
 
 import web.development.services.dto.input.baseEntities.BaseEntityDto;
+import web.development.models.enums.RoleType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class UserDto extends BaseEntityDto {
-    public String username;
-    public String password;
-    public String firstName;
-    public String lastName;
-    public Boolean isActive;
-    public String imageUrl;
-    public RoleDto role;
+    @NotEmpty(message = "Username cannot be empty")
+    private String username;
 
-    public UserDto( String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
+    @Size(min = 4, message = "Password must be at least 4 characters long")
+    private String password;
+
+    @NotEmpty(message = "First name cannot be empty")
+    private String firstName;
+
+    @NotEmpty(message = "Last name cannot be empty")
+    private String lastName;
+
+    @NotNull(message = "isActive cannot be null")
+    private Boolean isActive;
+
+    private String imageUrl;
+
+    @NotNull(message = "Role cannot be null")
+    private RoleDto role;
+
+    public UserDto(String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -56,12 +72,12 @@ public class UserDto extends BaseEntityDto {
         this.lastName = lastName;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
-        isActive = active;
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getImageUrl() {
@@ -72,8 +88,11 @@ public class UserDto extends BaseEntityDto {
         this.imageUrl = imageUrl;
     }
 
+    public RoleDto getRole() {
+        return role;
+    }
+
     public void setRole(RoleDto role) {
         this.role = role;
     }
-
 }

@@ -1,15 +1,18 @@
 package web.development.services.implementations;
 
+import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.Offer;
+import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.input.RoleDto;
 import web.development.models.entities.Role;
 import web.development.repositories.RoleRepository;
 import web.development.services.interfaces.RoleService;
+import web.development.util.ValidationUtilImpl;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,16 +20,35 @@ public class RoleServiceImpl implements RoleService<String> {
 
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
+    private final ValidationUtilImpl validationUtil;
 
     @Autowired
-    public RoleServiceImpl(RoleRepository roleRepository, ModelMapper modelMapper) {
+    public RoleServiceImpl(RoleRepository roleRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil) {
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
+        this.validationUtil = validationUtil;
     }
 
     @Override
     public RoleDto save(RoleDto userRole) {
-        return modelMapper.map(roleRepository.saveAndFlush(modelMapper.map(userRole, Role.class)), RoleDto.class);
+
+        if (!this.validationUtil.isValid(userRole)) {
+            this.validationUtil
+                    .violations(userRole)
+                    .stream()
+                    .map(ConstraintViolation::getMessage)
+                    .forEach(System.out::println);
+
+        } else {
+            try {
+                return modelMapper.map(roleRepository.saveAndFlush(modelMapper.map(userRole, Role.class)), RoleDto.class);
+            } catch (Exception e) {
+                System.out.println("Some thing went wrong!");
+            }
+        }
+
+        return null;
+
     }
 
     @Override
