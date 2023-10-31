@@ -9,7 +9,9 @@ import web.development.models.enums.ModelCategory;
 import web.development.models.enums.RoleType;
 import web.development.models.enums.TransmissionType;
 import web.development.services.dto.input.*;
-import web.development.services.interfaces.*;
+import web.development.services.implementations.ModelServiceImpl;
+import web.development.services.interfaces.internalApi.ModelInternalService;
+import web.development.services.interfaces.publicApi.*;
 
 import java.math.BigDecimal;
 
@@ -23,12 +25,12 @@ public class DataInitializer implements CommandLineRunner {
 
     private final BrandService brandService;
 
-    private final ModelService modelService;
+    private final ModelServiceImpl modelService;
     private final OfferService offerService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public DataInitializer(RoleService roleService, UserService userService, BrandService brandService, ModelService modelService, OfferService offerService, ModelMapper modelMapper) {
+    public DataInitializer(RoleService roleService, UserService userService, BrandService brandService, ModelServiceImpl modelService, OfferService offerService, ModelMapper modelMapper) {
         this.roleService = roleService;
         this.userService = userService;
         this.brandService = brandService;

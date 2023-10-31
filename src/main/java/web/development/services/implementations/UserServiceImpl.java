@@ -4,20 +4,20 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.models.entities.Role;
-import web.development.services.dto.input.RoleDto;
 import web.development.services.dto.input.UserDto;
 import web.development.services.dto.output.UserOutputDto;
 import web.development.models.entities.User;
 import web.development.repositories.UserRepository;
-import web.development.services.interfaces.UserService;
+import web.development.services.exceptions.UserNotFoundException;
+import web.development.services.interfaces.internalApi.UserInternalService;
+import web.development.services.interfaces.publicApi.UserService;
 import web.development.util.ValidationUtilImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService<String> {
+public class UserServiceImpl implements UserService<String>, UserInternalService<String> {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -69,6 +69,10 @@ public class UserServiceImpl implements UserService<String> {
 
     @Override
     public UserDto findByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        if(user == null){
+            throw new UserNotFoundException();
+        }
         return modelMapper.map(userRepository.findByUsername(username),UserDto.class);
     }
 

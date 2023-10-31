@@ -4,13 +4,12 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.models.entities.Model;
-import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.output.OfferOutputDto;
 import web.development.models.entities.Offer;
 import web.development.repositories.OfferRepository;
-import web.development.services.interfaces.OfferService;
+import web.development.services.interfaces.internalApi.OfferInternalService;
+import web.development.services.interfaces.publicApi.OfferService;
 import web.development.util.ValidationUtilImpl;
 
 import java.math.BigDecimal;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class OfferServiceImpl implements OfferService<String> {
+public class OfferServiceImpl implements OfferService<String>, OfferInternalService<String> {
 
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;

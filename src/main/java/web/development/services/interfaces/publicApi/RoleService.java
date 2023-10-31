@@ -1,4 +1,4 @@
-package web.development.services.interfaces;
+package web.development.services.interfaces.publicApi;
 
 import web.development.models.entities.Role;
 import web.development.services.dto.input.RoleDto;
@@ -12,6 +12,4 @@ public interface RoleService<ID> {
     RoleDto findById(ID id);  // Read
 
     List<RoleDto> findAll();  // Read
-
-    void deleteById(ID id);  // Delete
 }

@@ -6,7 +6,8 @@ import org.springframework.stereotype.Service;
 import web.development.services.dto.input.BrandDto;
 import web.development.models.entities.Brand;
 import web.development.repositories.BrandRepository;
-import web.development.services.interfaces.BrandService;
+import web.development.services.interfaces.internalApi.BrandInternalService;
+import web.development.services.interfaces.publicApi.BrandService;
 import web.development.util.ValidationUtilImpl;
 import jakarta.validation.ConstraintViolation;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class BrandServiceImpl implements BrandService<String> {
+public class BrandServiceImpl implements BrandService<String>, BrandInternalService<String> {
 
 
     private final BrandRepository brandRepository;
@@ -39,6 +40,8 @@ public class BrandServiceImpl implements BrandService<String> {
                     .stream()
                     .map(ConstraintViolation::getMessage)
                     .forEach(System.out::println);
+
+
 
         } else {
             try {

@@ -4,20 +4,19 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.models.entities.Brand;
-import web.development.services.dto.input.BrandDto;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.output.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
-import web.development.services.interfaces.ModelService;
+import web.development.services.interfaces.internalApi.ModelInternalService;
+import web.development.services.interfaces.publicApi.ModelService;
 import web.development.util.ValidationUtilImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelServiceImpl implements ModelService<String> {
+public class ModelServiceImpl implements ModelService<String>, ModelInternalService<String> {
 
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;

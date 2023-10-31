@@ -1,4 +1,4 @@
-package web.development.services.interfaces;
+package web.development.services.interfaces.publicApi;
 
 import web.development.models.entities.User;
 import web.development.services.dto.input.UserDto;
@@ -10,11 +10,7 @@ public interface UserService<ID> {
 
     UserDto save(UserDto user);  // Create/Update
 
-    User findById(ID id);  // Read
-
     List<UserOutputDto> findAll();  // Read
-
-    void deleteById(ID id);  // Delete
 
     UserDto findByUsername(String username);
 

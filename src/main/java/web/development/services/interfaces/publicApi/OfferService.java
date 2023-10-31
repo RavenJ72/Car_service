@@ -1,4 +1,4 @@
-package web.development.services.interfaces;
+package web.development.services.interfaces.publicApi;
 
 import web.development.models.entities.Offer;
 import web.development.services.dto.input.OfferDto;
@@ -11,11 +11,7 @@ public interface OfferService<ID> {
 
     OfferDto save(OfferDto offer);  // Create/Update
 
-    Offer findById(ID id);  // Read
-
     List<OfferOutputDto> findAll();  // Read
-
-    void deleteById(ID id);  // Delete
 
     List<OfferOutputDto> findOffersByBrandName(String brandName);
 

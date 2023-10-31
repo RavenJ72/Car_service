@@ -4,19 +4,18 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.models.entities.Offer;
-import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.input.RoleDto;
 import web.development.models.entities.Role;
 import web.development.repositories.RoleRepository;
-import web.development.services.interfaces.RoleService;
+import web.development.services.interfaces.internalApi.RoleInternalService;
+import web.development.services.interfaces.publicApi.RoleService;
 import web.development.util.ValidationUtilImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl implements RoleService<String> {
+public class RoleServiceImpl implements RoleService<String>, RoleInternalService<String> {
 
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
