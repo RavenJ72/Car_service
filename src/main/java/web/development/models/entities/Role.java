@@ -13,8 +13,7 @@ import java.util.*;
 public class Role extends BaseEntity {
 
 
-    @Convert(converter = RoleTypeConverter.class)
-    @Column(name = "role", length = 11, nullable = false)
+
     private RoleType role;
 
     @OneToMany(mappedBy = "role", orphanRemoval = true,cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
@@ -26,7 +25,8 @@ public class Role extends BaseEntity {
     public Role(RoleType role) {
         this.role = role;
     }
-
+    @Convert(converter = RoleTypeConverter.class)
+    @Column(name = "role", length = 11, nullable = false)
     public RoleType getRole() {
         return role;
     }

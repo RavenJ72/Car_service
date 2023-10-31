@@ -9,7 +9,7 @@ import java.util.UUID;
 
 
 @Repository
-public interface ModelRepository extends JpaRepository<Model, UUID>{
+public interface ModelRepository extends JpaRepository<Model, String>{
 
     List<Model> findByBrand_Name(String name);
 

@@ -1,11 +1,9 @@
 package web.development.services.interfaces;
 
-import web.development.dto.input.UserDto;
-import web.development.dto.output.UserOutputDto;
-import web.development.models.entities.User;
+import web.development.services.dto.input.UserDto;
+import web.development.services.dto.output.UserOutputDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService<ID> {
 

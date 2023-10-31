@@ -1,9 +1,7 @@
-package web.development.dto.input;
+package web.development.services.dto.input;
 
-import web.development.dto.input.baseEntities.BaseEntityDto;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.RoleType;
-
-import java.util.UUID;
 
 public class RoleDto extends BaseEntityDto {
     public RoleType role;

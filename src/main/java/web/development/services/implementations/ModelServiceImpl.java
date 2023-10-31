@@ -3,8 +3,8 @@ package web.development.services.implementations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.dto.input.ModelDto;
-import web.development.dto.output.ModelOutputDto;
+import web.development.services.dto.input.ModelDto;
+import web.development.services.dto.output.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
 import web.development.services.interfaces.ModelService;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class ModelServiceImpl implements ModelService<UUID> {
+public class ModelServiceImpl implements ModelService<String> {
 
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
@@ -31,7 +31,7 @@ public class ModelServiceImpl implements ModelService<UUID> {
     }
 
     @Override
-    public ModelDto findById(UUID id) {
+    public ModelDto findById(String id) {
         return modelMapper.map(modelRepository.findById(id).orElse(null), ModelDto.class);
     }
 
@@ -41,7 +41,7 @@ public class ModelServiceImpl implements ModelService<UUID> {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(String id) {
         modelRepository.deleteById(id);
     }
 

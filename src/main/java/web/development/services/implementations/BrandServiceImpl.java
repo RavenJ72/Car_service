@@ -2,18 +2,17 @@ package web.development.services.implementations;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import web.development.dto.input.BrandDto;
+import web.development.services.dto.input.BrandDto;
 import web.development.models.entities.Brand;
 import web.development.repositories.BrandRepository;
 import web.development.services.interfaces.BrandService;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 
 @Service
-public class BrandServiceImpl implements BrandService<UUID> {
+public class BrandServiceImpl implements BrandService<String> {
 
 
     private final BrandRepository brandRepository;
@@ -32,7 +31,7 @@ public class BrandServiceImpl implements BrandService<UUID> {
     }
 
     @Override
-    public BrandDto findById(UUID id) {
+    public BrandDto findById(String id) {
         return modelMapper.map(brandRepository.findById(id).orElse(null),BrandDto.class);
     }
 
@@ -42,7 +41,7 @@ public class BrandServiceImpl implements BrandService<UUID> {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(String id) {
         brandRepository.deleteById(id);
     }
 

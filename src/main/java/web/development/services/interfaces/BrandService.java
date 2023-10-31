@@ -1,7 +1,6 @@
 package web.development.services.interfaces;
 
-import web.development.dto.input.BrandDto;
-import web.development.models.entities.Brand;
+import web.development.services.dto.input.BrandDto;
 
 import java.util.List;
 

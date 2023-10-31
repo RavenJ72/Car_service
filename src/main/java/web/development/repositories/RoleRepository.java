@@ -9,5 +9,5 @@ import web.development.models.entities.Role;
 import java.util.UUID;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, UUID> {
+public interface RoleRepository extends JpaRepository<Role, String> {
 }

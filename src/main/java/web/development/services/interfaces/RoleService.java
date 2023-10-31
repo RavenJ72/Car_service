@@ -1,7 +1,6 @@
 package web.development.services.interfaces;
 
-import web.development.dto.input.RoleDto;
-import web.development.models.entities.Role;
+import web.development.services.dto.input.RoleDto;
 
 import java.util.List;
 

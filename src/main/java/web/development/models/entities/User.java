@@ -9,22 +9,11 @@ import java.util.*;
 @Entity
 @Table(name = "users")
 public class User extends TimeBaseEntity {
-    @Column(name = "username", length = 255, nullable = false)
     private String username;
-
-    @Column(name = "password", length = 255, nullable = false)
     private String password;
-
-    @Column(name = "firstName", length = 255, nullable = false)
     private String firstName;
-
-    @Column(name = "lastName", length = 255, nullable = false)
     private String lastName;
-
-    @Column(name = "isActive")
     private Boolean isActive;
-
-    @Column(name = "imageUrl", length = 512, nullable = false)
     private String imageUrl;
 
     @Convert(converter = RoleTypeConverter.class)
@@ -38,6 +27,7 @@ public class User extends TimeBaseEntity {
     public User() {
 
     }
+    @Column(name = "username", length = 255, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -45,7 +35,7 @@ public class User extends TimeBaseEntity {
     public void setUsername(String username) {
         this.username = username;
     }
-
+    @Column(name = "password", length = 255, nullable = false)
     public String getPassword() {
         return password;
     }
@@ -53,7 +43,7 @@ public class User extends TimeBaseEntity {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    @Column(name = "firstName", length = 255, nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -61,7 +51,7 @@ public class User extends TimeBaseEntity {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
+    @Column(name = "lastName", length = 255, nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -69,7 +59,7 @@ public class User extends TimeBaseEntity {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+    @Column(name = "isActive")
     public Boolean getActive() {
         return isActive;
     }
@@ -77,7 +67,7 @@ public class User extends TimeBaseEntity {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
+    @Column(name = "imageUrl", length = 512, nullable = false)
     public String getImageUrl() {
         return imageUrl;
     }

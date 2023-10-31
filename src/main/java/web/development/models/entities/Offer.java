@@ -13,28 +13,14 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "offers")
 public class Offer extends TimeBaseEntity {
-
-    @Column(name = "description", columnDefinition = "text")
     private String description;
-
-    @Convert(converter = EngineTypeConverter.class)
-    @Column(name = "engine", length = 11, nullable = false)
     private EngineType engine;
-
-    @Column(name = "imageUrl", length = 512, nullable = false)
     private String imageUrl;
-
-    @Column(name = "mileage", length = 11, nullable = false)
     private Integer mileage;
-
-    @Column(name = "price", columnDefinition = "numeric(19,2)", nullable = false)
     private BigDecimal price;
-
-    @Convert(converter = TransmissionTypeConverter.class)
-    @Column(name = "transmission", length = 11, nullable = false)
     private TransmissionType transmission;
 
-    @Column(name = "year", length = 11, nullable = false)
+
     private Integer year;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -48,7 +34,7 @@ public class Offer extends TimeBaseEntity {
     public Offer() {
     }
 
-
+    @Column(name = "description", columnDefinition = "text")
     public String getDescription() {
         return description;
     }
@@ -57,6 +43,8 @@ public class Offer extends TimeBaseEntity {
         this.description = description;
     }
 
+    @Convert(converter = EngineTypeConverter.class)
+    @Column(name = "engine", length = 11, nullable = false)
     public EngineType getEngine() {
         return engine;
     }
@@ -65,6 +53,7 @@ public class Offer extends TimeBaseEntity {
         this.engine = engine;
     }
 
+    @Column(name = "imageUrl", length = 512, nullable = false)
     public String getImageUrl() {
         return imageUrl;
     }
@@ -73,6 +62,7 @@ public class Offer extends TimeBaseEntity {
         this.imageUrl = imageUrl;
     }
 
+    @Column(name = "mileage", length = 11, nullable = false)
     public Integer getMileage() {
         return mileage;
     }
@@ -81,6 +71,7 @@ public class Offer extends TimeBaseEntity {
         this.mileage = mileage;
     }
 
+    @Column(name = "price", columnDefinition = "numeric(19,2)", nullable = false)
     public BigDecimal getPrice() {
         return price;
     }
@@ -89,6 +80,8 @@ public class Offer extends TimeBaseEntity {
         this.price = price;
     }
 
+    @Convert(converter = TransmissionTypeConverter.class)
+    @Column(name = "transmission", length = 11, nullable = false)
     public TransmissionType getTransmission() {
         return transmission;
     }
@@ -97,6 +90,7 @@ public class Offer extends TimeBaseEntity {
         this.transmission = transmission;
     }
 
+    @Column(name = "year", length = 11, nullable = false)
     public Integer getYear() {
         return year;
     }

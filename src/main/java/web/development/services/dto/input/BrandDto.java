@@ -1,9 +1,6 @@
-package web.development.dto.input;
+package web.development.services.dto.input;
 
-import web.development.dto.input.baseEntities.BaseEntityDto;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 
 public class BrandDto extends BaseEntityDto {
     public String name;

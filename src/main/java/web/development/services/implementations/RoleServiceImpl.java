@@ -3,7 +3,7 @@ package web.development.services.implementations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.dto.input.RoleDto;
+import web.development.services.dto.input.RoleDto;
 import web.development.models.entities.Role;
 import web.development.repositories.RoleRepository;
 import web.development.services.interfaces.RoleService;
@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class RoleServiceImpl implements RoleService<UUID> {
+public class RoleServiceImpl implements RoleService<String> {
 
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
@@ -30,7 +30,7 @@ public class RoleServiceImpl implements RoleService<UUID> {
     }
 
     @Override
-    public RoleDto findById(UUID id) {
+    public RoleDto findById(String id) {
         return modelMapper.map(roleRepository.findById(id).orElse(null), RoleDto.class);
     }
 
@@ -40,7 +40,7 @@ public class RoleServiceImpl implements RoleService<UUID> {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(String id) {
         roleRepository.deleteById(id);
     }
 }

@@ -1,26 +1,28 @@
-package web.development.dto.output;
+package web.development.services.dto.input;
 
-import web.development.dto.input.BrandDto;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.ModelCategory;
 
-public class ModelOutputDto {
+public class ModelDto extends BaseEntityDto {
+
     public String name;
     public ModelCategory category;
     public String imageUrl;
     public Integer startYear;
     public Integer endYear;
-    public String brand_name;
+    public BrandDto brand;
 
-    public ModelOutputDto(String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, String brand_name) {
+
+    public ModelDto( String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;
         this.startYear = startYear;
         this.endYear = endYear;
-        this.brand_name = brand_name;
+        this.brand = brand;
     }
 
-    public ModelOutputDto() {
+    public ModelDto() {
     }
 
     public String getName() {
@@ -63,23 +65,11 @@ public class ModelOutputDto {
         this.endYear = endYear;
     }
 
-    public String getBrand_name() {
-        return brand_name;
+    public BrandDto getBrand() {
+        return brand;
     }
 
-    public void setBrand_name(String brand_name) {
-        this.brand_name = brand_name;
-    }
-
-    @Override
-    public String toString() {
-        return "ModelOutputDto{" +
-                "name='" + name + '\'' +
-                ", category=" + category +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", startYear=" + startYear +
-                ", endYear=" + endYear +
-                ", brand_name='" + brand_name + '\'' +
-                '}';
+    public void setBrand(BrandDto brand) {
+        this.brand = brand;
     }
 }

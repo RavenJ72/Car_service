@@ -1,12 +1,10 @@
-package web.development.dto.output;
+package web.development.services.dto.output;
 
-import web.development.dto.input.ModelDto;
-import web.development.dto.input.UserDto;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
 
 import java.math.BigDecimal;
-import java.util.UUID;
+
 
 public class OfferOutputDto {
 
@@ -25,10 +23,10 @@ public class OfferOutputDto {
 
     public Integer year;
 
-    public UUID model_id;
-    public UUID seller_id;
+    public String model_id;
+    public String seller_id;
 
-    public OfferOutputDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, UUID model_id, UUID seller_id) {
+    public OfferOutputDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, String model_id, String seller_id) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -99,11 +97,11 @@ public class OfferOutputDto {
         this.year = year;
     }
 
-    public UUID getModel_id() {
+    public String getModel_id() {
         return model_id;
     }
 
-    public void setModel_id(UUID model_id) {
+    public void setModel_id(String model_id) {
         this.model_id = model_id;
     }
 
@@ -122,11 +120,11 @@ public class OfferOutputDto {
                 '}';
     }
 
-    public UUID getSeller_id() {
+    public String getSeller_id() {
         return seller_id;
     }
 
-    public void setSeller_id(UUID seller_id) {
+    public void setSeller_id(String seller_id) {
         this.seller_id = seller_id;
     }
 }

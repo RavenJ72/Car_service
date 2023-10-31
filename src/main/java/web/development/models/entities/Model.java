@@ -10,20 +10,19 @@ import web.development.models.enums.ModelCategory;
 @Table(name = "models")
 public class Model extends TimeBaseEntity {
 
-    @Column(name = "name", length = 255, nullable = false)
+
     private String name;
 
-    @Convert(converter = ModelCategoryConverter.class)
-    @Column(name = "category", length = 11, nullable = false)
+
     private ModelCategory category;
 
-    @Column(name = "imageUrl", length = 512, nullable = false)
+
     private String imageUrl;
 
-    @Column(name = "startYear", length = 11, nullable = false)
+
     private Integer startYear;
 
-    @Column(name = "endYear", length = 11, nullable = false)
+
     private Integer endYear;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -33,7 +32,7 @@ public class Model extends TimeBaseEntity {
     public Model() {
     }
 
-
+    @Column(name = "name", length = 255, nullable = false)
     public String getName() {
         return name;
     }
@@ -41,7 +40,8 @@ public class Model extends TimeBaseEntity {
     public void setName(String name) {
         this.name = name;
     }
-
+    @Convert(converter = ModelCategoryConverter.class)
+    @Column(name = "category", length = 11, nullable = false)
     public ModelCategory getCategory() {
         return category;
     }
@@ -49,7 +49,7 @@ public class Model extends TimeBaseEntity {
     public void setCategory(ModelCategory category) {
         this.category = category;
     }
-
+    @Column(name = "imageUrl", length = 512, nullable = false)
     public String getImageUrl() {
         return imageUrl;
     }
@@ -57,7 +57,7 @@ public class Model extends TimeBaseEntity {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
+    @Column(name = "startYear", length = 11, nullable = false)
     public Integer getStartYear() {
         return startYear;
     }
@@ -65,7 +65,7 @@ public class Model extends TimeBaseEntity {
     public void setStartYear(Integer startYear) {
         this.startYear = startYear;
     }
-
+    @Column(name = "endYear", length = 11, nullable = false)
     public Integer getEndYear() {
         return endYear;
     }

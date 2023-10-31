@@ -3,8 +3,8 @@ package web.development.services.implementations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.dto.input.OfferDto;
-import web.development.dto.output.OfferOutputDto;
+import web.development.services.dto.input.OfferDto;
+import web.development.services.dto.output.OfferOutputDto;
 import web.development.models.entities.Offer;
 import web.development.repositories.OfferRepository;
 import web.development.services.interfaces.OfferService;
@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class OfferServiceImpl implements OfferService<UUID> {
+public class OfferServiceImpl implements OfferService<String> {
 
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;
@@ -32,7 +32,7 @@ public class OfferServiceImpl implements OfferService<UUID> {
     }
 
     @Override
-    public OfferDto findById(UUID id) {
+    public OfferDto findById(String id) {
         return modelMapper.map(offerRepository.findById(id).orElse(null), OfferDto.class);
     }
 
@@ -42,7 +42,7 @@ public class OfferServiceImpl implements OfferService<UUID> {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(String id) {
         offerRepository.deleteById(id);
     }
 

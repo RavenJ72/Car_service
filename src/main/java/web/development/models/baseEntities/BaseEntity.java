@@ -1,25 +1,27 @@
 package web.development.models.baseEntities;
 
 import jakarta.persistence.*;
-
+import org.hibernate.annotations.GenericGenerator;
 
 
 import java.util.UUID;
 @MappedSuperclass
 public abstract class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id", updatable = false, nullable = false)
-    private UUID id;
+    @GeneratedValue(generator = "uuid-string")
+    @GenericGenerator(name = "uuid-string",
+            strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     public BaseEntity() {
     }
 
-    public UUID getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

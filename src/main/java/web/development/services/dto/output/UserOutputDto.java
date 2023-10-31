@@ -1,16 +1,14 @@
-package web.development.dto.output;
+package web.development.services.dto.output;
 
-import web.development.dto.input.RoleDto;
 
-import java.util.UUID;
 
 public class UserOutputDto {
     public String username;
     public Boolean isActive;
     public String imageUrl;
-    public UUID role_id;
+    public String role_id;
 
-    public UserOutputDto(String username, Boolean isActive, String imageUrl, UUID role_id) {
+    public UserOutputDto(String username, Boolean isActive, String imageUrl, String role_id) {
         this.username = username;
         this.isActive = isActive;
         this.imageUrl = imageUrl;
@@ -44,11 +42,11 @@ public class UserOutputDto {
         this.imageUrl = imageUrl;
     }
 
-    public UUID getRole_id() {
+    public String getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(UUID role_id) {
+    public void setRole_id(String role_id) {
         this.role_id = role_id;
     }
 

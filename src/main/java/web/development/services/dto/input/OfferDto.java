@@ -1,12 +1,10 @@
-package web.development.dto.input;
+package web.development.services.dto.input;
 
-import web.development.dto.input.baseEntities.BaseEntityDto;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 public class OfferDto extends BaseEntityDto {
 

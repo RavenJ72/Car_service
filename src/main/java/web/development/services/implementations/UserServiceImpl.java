@@ -3,8 +3,8 @@ package web.development.services.implementations;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import web.development.dto.input.UserDto;
-import web.development.dto.output.UserOutputDto;
+import web.development.services.dto.input.UserDto;
+import web.development.services.dto.output.UserOutputDto;
 import web.development.models.entities.User;
 import web.development.repositories.UserRepository;
 import web.development.services.interfaces.UserService;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService<UUID> {
+public class UserServiceImpl implements UserService<String> {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService<UUID> {
     }
 
     @Override
-    public UserDto findById(UUID id) {
+    public UserDto findById(String id) {
         return modelMapper.map(userRepository.findById(id).orElse(null), UserDto.class);
     }
 
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService<UUID> {
     }
 
     @Override
-    public void deleteById(UUID id) {
+    public void deleteById(String id) {
         userRepository.deleteById(id);
     }
 
