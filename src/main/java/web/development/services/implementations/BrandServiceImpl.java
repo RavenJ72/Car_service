@@ -26,13 +26,14 @@ public class BrandServiceImpl implements BrandService<String> {
 
 
     @Override
-    public BrandDto save(BrandDto brand) {
-        return modelMapper.map(brandRepository.save(modelMapper.map(brand,Brand.class)),BrandDto.class);
+    public BrandDto save(String brandName) {
+        BrandDto brand = new BrandDto(brandName);
+        return modelMapper.map(brandRepository.saveAndFlush(modelMapper.map(brand,Brand.class)),BrandDto.class);
     }
 
     @Override
-    public BrandDto findById(String id) {
-        return modelMapper.map(brandRepository.findById(id).orElse(null),BrandDto.class);
+    public Brand findById(String id) {
+        return brandRepository.findById(id).orElse(null);
     }
 
     @Override

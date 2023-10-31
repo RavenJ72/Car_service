@@ -46,7 +46,7 @@ public class Model extends TimeBaseEntity {
         return category;
     }
 
-    public void setCategory(ModelCategory category) {
+    private void setCategory(ModelCategory category) {
         this.category = category;
     }
     @Column(name = "imageUrl", length = 512, nullable = false)
@@ -62,15 +62,15 @@ public class Model extends TimeBaseEntity {
         return startYear;
     }
 
-    public void setStartYear(Integer startYear) {
+    private void setStartYear(Integer startYear) {
         this.startYear = startYear;
     }
     @Column(name = "endYear", length = 11, nullable = false)
-    public Integer getEndYear() {
+    private Integer getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Integer endYear) {
+    private void setEndYear(Integer endYear) {
         this.endYear = endYear;
     }
 
@@ -78,7 +78,7 @@ public class Model extends TimeBaseEntity {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    private void setBrand(Brand brand) {
         this.brand = brand;
     }
 }

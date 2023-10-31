@@ -28,12 +28,12 @@ public class OfferServiceImpl implements OfferService<String> {
 
     @Override
     public OfferDto save(OfferDto offer) {
-        return modelMapper.map(offerRepository.save(modelMapper.map(offer, Offer.class)), OfferDto.class);
+        return modelMapper.map(offerRepository.saveAndFlush(modelMapper.map(offer, Offer.class)), OfferDto.class);
     }
 
     @Override
-    public OfferDto findById(String id) {
-        return modelMapper.map(offerRepository.findById(id).orElse(null), OfferDto.class);
+    public Offer findById(String id) {
+        return offerRepository.findById(id).orElse(null);
     }
 
     @Override

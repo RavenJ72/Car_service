@@ -1,5 +1,6 @@
 package web.development.services.interfaces;
 
+import web.development.models.entities.User;
 import web.development.services.dto.input.UserDto;
 import web.development.services.dto.output.UserOutputDto;
 
@@ -9,7 +10,7 @@ public interface UserService<ID> {
 
     UserDto save(UserDto user);  // Create/Update
 
-    UserDto findById(ID id);  // Read
+    User findById(ID id);  // Read
 
     List<UserOutputDto> findAll();  // Read
 

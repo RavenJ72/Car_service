@@ -26,12 +26,12 @@ public class RoleServiceImpl implements RoleService<String> {
 
     @Override
     public RoleDto save(RoleDto userRole) {
-        return modelMapper.map(roleRepository.save(modelMapper.map(userRole, Role.class)), RoleDto.class);
+        return modelMapper.map(roleRepository.saveAndFlush(modelMapper.map(userRole, Role.class)), RoleDto.class);
     }
 
     @Override
     public RoleDto findById(String id) {
-        return modelMapper.map(roleRepository.findById(id).orElse(null), RoleDto.class);
+        return modelMapper.map(roleRepository.findById(id).orElse(null),RoleDto.class);
     }
 
     @Override

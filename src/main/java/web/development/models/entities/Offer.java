@@ -49,7 +49,7 @@ public class Offer extends TimeBaseEntity {
         return engine;
     }
 
-    public void setEngine(EngineType engine) {
+    private void setEngine(EngineType engine) {
         this.engine = engine;
     }
 
@@ -67,7 +67,7 @@ public class Offer extends TimeBaseEntity {
         return mileage;
     }
 
-    public void setMileage(Integer mileage) {
+    private void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
 
@@ -76,7 +76,7 @@ public class Offer extends TimeBaseEntity {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    private void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -86,7 +86,7 @@ public class Offer extends TimeBaseEntity {
         return transmission;
     }
 
-    public void setTransmission(TransmissionType transmission) {
+    private void setTransmission(TransmissionType transmission) {
         this.transmission = transmission;
     }
 
@@ -95,7 +95,7 @@ public class Offer extends TimeBaseEntity {
         return year;
     }
 
-    public void setYear(Integer year) {
+    private void setYear(Integer year) {
         this.year = year;
     }
 
@@ -103,7 +103,7 @@ public class Offer extends TimeBaseEntity {
         return model;
     }
 
-    public void setModel(Model model) {
+    private void setModel(Model model) {
         this.model = model;
     }
 
@@ -111,7 +111,7 @@ public class Offer extends TimeBaseEntity {
         return seller;
     }
 
-    public void setSeller(User seller) {
+    private void setSeller(User seller) {
         this.seller = seller;
     }
 }

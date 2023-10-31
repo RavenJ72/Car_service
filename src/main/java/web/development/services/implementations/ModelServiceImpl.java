@@ -27,12 +27,12 @@ public class ModelServiceImpl implements ModelService<String> {
 
     @Override
     public ModelDto save(ModelDto model) {
-        return modelMapper.map(modelRepository.save(modelMapper.map(model, Model.class)), ModelDto.class);
+        return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
     }
 
     @Override
-    public ModelDto findById(String id) {
-        return modelMapper.map(modelRepository.findById(id).orElse(null), ModelDto.class);
+    public Model findById(String id) {
+        return modelRepository.findById(id).orElse(null);
     }
 
     @Override

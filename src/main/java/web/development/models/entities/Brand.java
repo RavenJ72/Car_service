@@ -25,7 +25,7 @@ public class Brand extends TimeBaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
@@ -33,7 +33,7 @@ public class Brand extends TimeBaseEntity {
         return models;
     }
 
-    public void setModels(List<Model> models) {
+    private void setModels(List<Model> models) {
         this.models = models;
     }
 }

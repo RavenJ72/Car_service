@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService<String> {
 
     @Override
     public UserDto save(UserDto user) {
-        return modelMapper.map(userRepository.save(modelMapper.map(user, User.class)), UserDto.class);
+        return modelMapper.map(userRepository.saveAndFlush(modelMapper.map(user, User.class)), UserDto.class);
     }
 
     @Override
-    public UserDto findById(String id) {
-        return modelMapper.map(userRepository.findById(id).orElse(null), UserDto.class);
+    public User findById(String id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override

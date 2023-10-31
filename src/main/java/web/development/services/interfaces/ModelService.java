@@ -1,5 +1,6 @@
 package web.development.services.interfaces;
 
+import web.development.models.entities.Model;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.output.ModelOutputDto;
 
@@ -10,7 +11,7 @@ public interface ModelService<ID> {
 
     ModelDto save(ModelDto model);  // Create/Update
 
-    ModelDto findById(ID id);  // Read
+    Model findById(ID id);  // Read
 
     List<ModelOutputDto> findAll();  // Read
 

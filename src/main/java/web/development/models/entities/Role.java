@@ -16,7 +16,7 @@ public class Role extends BaseEntity {
 
     private RoleType role;
 
-    @OneToMany(mappedBy = "role", orphanRemoval = true,cascade = CascadeType.REMOVE,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role", orphanRemoval = true,fetch = FetchType.LAZY)
     private List<User> users = new ArrayList<>();
 
     public Role() {
@@ -31,7 +31,7 @@ public class Role extends BaseEntity {
         return role;
     }
 
-    public void setRole(RoleType role) {
+    private void setRole(RoleType role) {
         this.role = role;
     }
 }

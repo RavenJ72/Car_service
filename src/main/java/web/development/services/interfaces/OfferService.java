@@ -1,5 +1,6 @@
 package web.development.services.interfaces;
 
+import web.development.models.entities.Offer;
 import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.output.OfferOutputDto;
 
@@ -10,7 +11,7 @@ public interface OfferService<ID> {
 
     OfferDto save(OfferDto offer);  // Create/Update
 
-    OfferDto findById(ID id);  // Read
+    Offer findById(ID id);  // Read
 
     List<OfferOutputDto> findAll();  // Read
 

@@ -1,5 +1,6 @@
 package web.development.services.interfaces;
 
+import web.development.models.entities.Brand;
 import web.development.services.dto.input.BrandDto;
 
 import java.util.List;
@@ -7,9 +8,9 @@ import java.util.List;
 
 public interface BrandService<ID> {
 
-    BrandDto save(BrandDto brand);  // Create/Update
+    BrandDto save(String brand);  // Create/Update
 
-    BrandDto findById(ID id);  // Read
+    Brand findById(ID id);  // Read
 
     List<BrandDto> findAll();  // Read
 
