@@ -3,12 +3,15 @@ package web.development.services.dto.output;
 
 
 public class UserOutputDto {
+    public String id;
+
     public String username;
     public Boolean isActive;
     public String imageUrl;
     public String role_id;
 
-    public UserOutputDto(String username, Boolean isActive, String imageUrl, String role_id) {
+    public UserOutputDto(String id, String username, Boolean isActive, String imageUrl, String role_id) {
+        this.id = id;
         this.username = username;
         this.isActive = isActive;
         this.imageUrl = imageUrl;

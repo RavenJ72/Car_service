@@ -1,5 +1,6 @@
 package web.development.services.dto.input;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import web.development.services.dto.input.baseEntities.BaseEntityDto;
 import web.development.models.enums.RoleType;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class UserDto extends BaseEntityDto {
+
     @NotEmpty(message = "Username cannot be empty")
     private String username;
 

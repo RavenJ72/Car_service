@@ -4,16 +4,23 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.Model;
+import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.output.OfferOutputDto;
 import web.development.models.entities.Offer;
 import web.development.repositories.OfferRepository;
+import web.development.services.exceptions.NotFoundException;
+import web.development.services.exceptions.SaveException;
+import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.OfferInternalService;
 import web.development.services.interfaces.publicApi.OfferService;
 import web.development.util.ValidationUtilImpl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,27 +40,32 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     @Override
     public OfferDto save(OfferDto offer) {
         if (!this.validationUtil.isValid(offer)) {
-            this.validationUtil
+            String exceptionMessage = "The data is not valid:\n";
+            List<String> validationErrors = new ArrayList<>(this.validationUtil
                     .violations(offer)
                     .stream()
                     .map(ConstraintViolation::getMessage)
-                    .forEach(System.out::println);
+                    .collect(Collectors.toList()));
+
+            exceptionMessage += String.join("\n", validationErrors);
+            throw new ValidationException(exceptionMessage);
 
         } else {
             try {
                 return modelMapper.map(offerRepository.saveAndFlush(modelMapper.map(offer, Offer.class)), OfferDto.class);
             } catch (Exception e) {
-                System.out.println("Some thing went wrong!");
+                throw new SaveException("Failed to save the object.");
             }
         }
-
-        return null;
-
     }
 
     @Override
     public Offer findById(String id) {
-        return offerRepository.findById(id).orElse(null);
+        Optional<Offer> offer = offerRepository.findById(id);
+        if (offer.isEmpty()){
+            throw new NotFoundException("Offer with this id not found");
+        }
+        return (Offer) offer.get();
     }
 
     @Override

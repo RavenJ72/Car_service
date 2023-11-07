@@ -4,14 +4,21 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.Model;
+import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.RoleDto;
 import web.development.models.entities.Role;
 import web.development.repositories.RoleRepository;
+import web.development.services.exceptions.NotFoundException;
+import web.development.services.exceptions.SaveException;
+import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.RoleInternalService;
 import web.development.services.interfaces.publicApi.RoleService;
 import web.development.util.ValidationUtilImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,27 +39,32 @@ public class RoleServiceImpl implements RoleService<String>, RoleInternalService
     public RoleDto save(RoleDto userRole) {
 
         if (!this.validationUtil.isValid(userRole)) {
-            this.validationUtil
+            String exceptionMessage = "The data is not valid:\n";
+            List<String> validationErrors = new ArrayList<>(this.validationUtil
                     .violations(userRole)
                     .stream()
                     .map(ConstraintViolation::getMessage)
-                    .forEach(System.out::println);
+                    .collect(Collectors.toList()));
+
+            exceptionMessage += String.join("\n", validationErrors);
+            throw new ValidationException(exceptionMessage);
 
         } else {
             try {
                 return modelMapper.map(roleRepository.saveAndFlush(modelMapper.map(userRole, Role.class)), RoleDto.class);
             } catch (Exception e) {
-                System.out.println("Some thing went wrong!");
+                throw new SaveException("Failed to save the role.");
             }
         }
-
-        return null;
-
     }
 
     @Override
     public RoleDto findById(String id) {
-        return modelMapper.map(roleRepository.findById(id).orElse(null),RoleDto.class);
+        Optional<Role> role = roleRepository.findById(id);
+        if (role.isEmpty()){
+            throw new NotFoundException("Model with this id not found");
+        }
+        return modelMapper.map(role.get(),RoleDto.class);
     }
 
     @Override

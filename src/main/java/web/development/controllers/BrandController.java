@@ -21,11 +21,11 @@ public class BrandController {
     }
 
     @PostMapping("/create")
-    public BrandDto save(@RequestParam String brandName){
+    public BrandDto save(@RequestBody String brandName){
         return brandService.save(brandName);
     }
 
-    @GetMapping("/findByName")
+    @GetMapping("/findByName/{name}")
     public BrandDto findByName(@RequestParam String name){
         return brandService.findByName(name);
     }

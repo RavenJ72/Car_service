@@ -8,11 +8,16 @@ import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.output.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
+import web.development.services.exceptions.NotFoundException;
+import web.development.services.exceptions.SaveException;
+import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.ModelInternalService;
 import web.development.services.interfaces.publicApi.ModelService;
 import web.development.util.ValidationUtilImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,27 +38,32 @@ public class ModelServiceImpl implements ModelService<String>, ModelInternalServ
     public ModelDto save(ModelDto model) {
 
         if (!this.validationUtil.isValid(model)) {
-            this.validationUtil
+            String exceptionMessage = "The data is not valid:\n";
+            List<String> validationErrors = new ArrayList<>(this.validationUtil
                     .violations(model)
                     .stream()
                     .map(ConstraintViolation::getMessage)
-                    .forEach(System.out::println);
+                    .collect(Collectors.toList()));
+
+            exceptionMessage += String.join("\n", validationErrors);
+            throw new ValidationException(exceptionMessage);
 
         } else {
             try {
                 return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
             } catch (Exception e) {
-                System.out.println("Some thing went wrong!");
+                throw new SaveException("Failed to save the model.");
             }
         }
-
-        return null;
-
     }
 
     @Override
     public Model findById(String id) {
-        return modelRepository.findById(id).orElse(null);
+        Optional<Model> model = modelRepository.findById(id);
+        if (model.isEmpty()){
+            throw new NotFoundException("Model with this id not found");
+        }
+        return (Model) model.get();
     }
 
     @Override

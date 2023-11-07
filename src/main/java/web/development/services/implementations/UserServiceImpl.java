@@ -4,16 +4,22 @@ import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.Model;
+import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.UserDto;
 import web.development.services.dto.output.UserOutputDto;
 import web.development.models.entities.User;
 import web.development.repositories.UserRepository;
-import web.development.services.exceptions.UserNotFoundException;
+import web.development.services.exceptions.NotFoundException;
+import web.development.services.exceptions.SaveException;
+import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.UserInternalService;
 import web.development.services.interfaces.publicApi.UserService;
 import web.development.util.ValidationUtilImpl;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,28 +39,35 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
     @Override
     public UserDto save(UserDto user) {
 
+        System.out.println(user.getRole().getRole().getUserRoleTypeCode());
         if (!this.validationUtil.isValid(user)) {
-            this.validationUtil
+            String exceptionMessage = "The data is not valid:\n";
+            List<String> validationErrors = new ArrayList<>(this.validationUtil
                     .violations(user)
                     .stream()
                     .map(ConstraintViolation::getMessage)
-                    .forEach(System.out::println);
+                    .collect(Collectors.toList()));
+
+            exceptionMessage += String.join("\n", validationErrors);
+            throw new ValidationException(exceptionMessage);
 
         } else {
             try {
                 return modelMapper.map(userRepository.saveAndFlush(modelMapper.map(user, User.class)), UserDto.class);
             } catch (Exception e) {
-                System.out.println("Some thing went wrong!");
+                System.out.println(e.getMessage());
+                throw new SaveException("Failed to save the user.");
             }
         }
-
-        return null;
-
     }
 
     @Override
     public User findById(String id) {
-        return userRepository.findById(id).orElse(null);
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()){
+            throw new NotFoundException("User with this id not found");
+        }
+        return (User) user.get();
     }
 
     @Override
@@ -71,9 +84,9 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
     public UserDto findByUsername(String username) {
         User user = userRepository.findByUsername(username);
         if(user == null){
-            throw new UserNotFoundException();
+            throw new NotFoundException("User with this username not found");
         }
-        return modelMapper.map(userRepository.findByUsername(username),UserDto.class);
+        return modelMapper.map(user,UserDto.class);
     }
 
     @Override

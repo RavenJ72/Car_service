@@ -13,6 +13,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -25,7 +26,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public UserDto save(UserDto user){
+    public UserDto save(@RequestBody UserDto user){
+        System.out.println(user.getUsername());
         return userService.save(user);
     }
 
@@ -34,8 +36,9 @@ public class UserController {
         return userService.findByUsername(username);
     }
 
-    @GetMapping("/findByActivity")
+    @GetMapping("/findByActivity/{isActive}")
     public List<UserOutputDto> findUsersByActivity(@PathVariable String isActive){
         return userService.findUsersByActivity(Boolean.getBoolean(isActive));
     }
+
 }
