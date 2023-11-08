@@ -27,9 +27,9 @@ public class UserDto extends BaseEntityDto {
     private String imageUrl;
 
     @NotNull(message = "Role cannot be null")
-    private RoleDto role;
+    private String role;
 
-    public UserDto(String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, RoleDto role) {
+    public UserDto(String username, String password, String firstName, String lastName, Boolean isActive, String imageUrl, String role) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -38,6 +38,8 @@ public class UserDto extends BaseEntityDto {
         this.imageUrl = imageUrl;
         this.role = role;
     }
+
+
 
     public UserDto() {
     }
@@ -90,11 +92,11 @@ public class UserDto extends BaseEntityDto {
         this.imageUrl = imageUrl;
     }
 
-    public RoleDto getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(RoleDto role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

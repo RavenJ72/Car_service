@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    String validationFailHandler(SaveException ex) {
+    String validationFailHandler(ValidationException ex) {
         return ex.getMessage();
     }
 }

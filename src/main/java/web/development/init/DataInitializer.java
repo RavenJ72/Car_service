@@ -52,14 +52,14 @@ public class DataInitializer implements CommandLineRunner {
         String adminRoleId = roleService.save(new RoleDto(RoleType.ADMIN)).getId();
         String userRoleID = roleService.save(new RoleDto(RoleType.USER)).getId();
 
-        String adminUser = userService.save(new UserDto( "Alex", "alex2023", "Alex", "Johnson", true, "alexj2023", roleService.findById(adminRoleId))).getUsername();
-        String user1 = userService.save(new UserDto( "Elena", "elena2023", "Elena", "Smith", true, "elenas123", roleService.findById(userRoleID))).getUsername();
-        String user2 = userService.save(new UserDto( "Michael", "mike2023", "Michael", "Brown", true, "mikeb123", roleService.findById(userRoleID))).getUsername();
-        String user3 = userService.save(new UserDto( "Sophia", "sophia2023", "Sophia", "Williams", true, "sophiaw123", roleService.findById(userRoleID))).getUsername();
-        String user4 = userService.save(new UserDto( "Daniel", "danny2023", "Daniel", "Miller", true, "dannym123", roleService.findById(userRoleID))).getUsername();
-        String user5 = userService.save(new UserDto( "Isabella", "izzy2023", "Isabella", "Davis", true, "izzyd123", roleService.findById(userRoleID))).getUsername();
-        String user6 = userService.save(new UserDto( "Вася", "11111", "giga", "wqe", true, "123123", roleService.findById(userRoleID))).getUsername();
-        String user7 = userService.save(new UserDto( "Антон", "11111", "sassy", "sssss", true, "123123", roleService.findById(userRoleID))).getUsername();
+        String adminUser = userService.save(new UserDto( "Alex", "alex2023", "Alex", "Johnson", true, "alexj2023", "ADMIN")).getUsername();
+        String user1 = userService.save(new UserDto( "Elena", "elena2023", "Elena", "Smith", true, "elenas123", "USER")).getUsername();
+        String user2 = userService.save(new UserDto( "Michael", "mike2023", "Michael", "Brown", true, "mikeb123", "USER")).getUsername();
+        String user3 = userService.save(new UserDto( "Sophia", "sophia2023", "Sophia", "Williams", true, "sophiaw123", "USER")).getUsername();
+        String user4 = userService.save(new UserDto( "Daniel", "danny2023", "Daniel", "Miller", true, "dannym123", "USER")).getUsername();
+        String user5 = userService.save(new UserDto( "Isabella", "izzy2023", "Isabella", "Davis", true, "izzyd123", "USER")).getUsername();
+        String user6 = userService.save(new UserDto( "Вася", "11111", "giga", "wqe", true, "123123", "USER")).getUsername();
+        String user7 = userService.save(new UserDto( "Антон", "11111", "sassy", "sssss", true, "123123", "USER")).getUsername();
 
 
         brandService.save("TESLA");

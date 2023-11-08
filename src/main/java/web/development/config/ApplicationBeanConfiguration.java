@@ -10,6 +10,7 @@ import jakarta.validation.Validator;
 import web.development.models.entities.Model;
 import web.development.models.entities.Offer;
 import web.development.models.entities.User;
+import web.development.services.dto.input.UserDto;
 import web.development.services.dto.output.ModelOutputDto;
 import web.development.services.dto.output.OfferOutputDto;
 import web.development.services.dto.output.UserOutputDto;
@@ -46,6 +47,11 @@ public class ApplicationBeanConfiguration {
         // UserOutPutDto
         TypeMap<User, UserOutputDto> typeMapUser = modelMapper.createTypeMap(User.class, UserOutputDto.class);
         typeMapUser.addMappings(m->m.map(src -> src.getRole().getId(), UserOutputDto::setRole_id));
+
+        TypeMap<User, UserDto> typeMapUserToDto = modelMapper.createTypeMap(User.class, UserDto.class);
+        typeMapUserToDto.addMappings(m->m.map(src -> src.getRole().getRole(), UserDto::setRole));
+
+
 
         return modelMapper;
     }

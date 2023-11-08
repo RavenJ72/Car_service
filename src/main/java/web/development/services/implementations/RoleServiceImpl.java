@@ -5,6 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.models.entities.Model;
+import web.development.models.enums.RoleType;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.RoleDto;
 import web.development.models.entities.Role;
@@ -75,5 +76,10 @@ public class RoleServiceImpl implements RoleService<String>, RoleInternalService
     @Override
     public void deleteById(String id) {
         roleRepository.deleteById(id);
+    }
+
+    @Override
+    public Role findByRoleType(RoleType roleType) {
+        return roleRepository.findAllByRole(roleType);
     }
 }

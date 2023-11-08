@@ -22,4 +22,6 @@ public class RoleTypeConverter implements AttributeConverter<RoleType, Integer> 
         }
         throw new IllegalArgumentException("Unknown database value: " + dbData);
     }
+
+
 }
