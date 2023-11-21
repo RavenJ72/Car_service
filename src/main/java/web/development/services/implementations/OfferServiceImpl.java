@@ -3,8 +3,12 @@ package web.development.services.implementations;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import web.development.models.entities.Model;
+import web.development.models.enums.EngineType;
+import web.development.models.enums.ModelCategory;
+import web.development.models.enums.TransmissionType;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.output.OfferOutputDto;
@@ -15,6 +19,7 @@ import web.development.services.exceptions.SaveException;
 import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.OfferInternalService;
 import web.development.services.interfaces.publicApi.OfferService;
+import web.development.services.specifications.OfferSpecification;
 import web.development.util.ValidationUtilImpl;
 
 import java.math.BigDecimal;
@@ -93,5 +98,21 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
         return offerRepository.findByPriceBetween(startPrice,endPrice).stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<OfferOutputDto> findFilteredOffers(String brandName, String engineType, String modelCategory, String transmission) {
+
+
+        Specification<Offer> spec = Specification.where(OfferSpecification.hasBrandName(brandName))
+                .and(OfferSpecification.hasEngineType( EngineType.getEngineTypeCodeFromString(engineType)))
+                .and(OfferSpecification.hasTransmission(TransmissionType.getTransmissionTypeCodeFromString(transmission)))
+                .and(OfferSpecification.hasModelCategory(ModelCategory.getModelCategoryCodeFromString(modelCategory)));
+
+
+        List<Offer> offers = offerRepository.findAll(spec);
+
+        return offers.stream()
+                .map(offer -> modelMapper.map(offer, OfferOutputDto.class))
+                .collect(Collectors.toList());
+    }
 
 }

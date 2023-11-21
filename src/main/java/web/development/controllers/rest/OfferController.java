@@ -1,4 +1,4 @@
-package web.development.controllers;
+package web.development.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/offer")
+@RequestMapping("/api/offer")
 public class OfferController {
 
     private final OfferService offerService;

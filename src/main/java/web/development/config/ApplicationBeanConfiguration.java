@@ -42,7 +42,7 @@ public class ApplicationBeanConfiguration {
         // ModelOutputDto
         TypeMap<Offer, OfferOutputDto> typeMapOfferDetails = modelMapper.createTypeMap(Offer.class, OfferOutputDto.class);
         typeMapOfferDetails.addMappings(m->m.map(src -> src.getSeller().getId(), OfferOutputDto::setSeller_id));
-        typeMapOfferDetails.addMappings(m->m.map(src -> src.getModel().getId(), OfferOutputDto::setModel_id));
+
 
         // UserOutPutDto
         TypeMap<User, UserOutputDto> typeMapUser = modelMapper.createTypeMap(User.class, UserOutputDto.class);

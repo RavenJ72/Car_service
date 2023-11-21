@@ -97,10 +97,10 @@ public class DataInitializer implements CommandLineRunner {
         String fordModel3 =   modelService.save(new ModelDto( "F-150", ModelCategory.CAR, "Пикап", 1975, 2023, brandService.findByName("FORD"))).getId();
 //
 //
-        OfferDto offerDto4 = new OfferDto("very cool",EngineType.GASOLINE,"images/car/bigcar222.png",2200,new BigDecimal("50000.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(teslaModel1),ModelDto.class),userService.findByUsername(user1));
-        OfferDto offerDto5 = new OfferDto("Протеккает крыша",EngineType.GASOLINE,"images/supercar2.png",1223,new BigDecimal("5000000.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(teslaModel2),ModelDto.class),userService.findByUsername(user5));
-        OfferDto offerDto6 = new OfferDto("Не работают тормаза, продаю со скидкой",EngineType.GASOLINE,"images/supercar22323.png",20120,new BigDecimal("12312310.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(fordModel2),ModelDto.class),userService.findByUsername(user6));
-        OfferDto offerDto7 = new OfferDto("Новая, не бита, не крашена!",EngineType.GASOLINE,"images/supercar/secret/vehicle/momscar.png",20220,new BigDecimal("10000000.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(bmwModel2),ModelDto.class),userService.findByUsername(user7));
+        OfferDto offerDto4 = new OfferDto("Отдаю за банку компота",EngineType.ELECTRIC,"https://s.auto.drom.ru/img4/catalog/photos/fullsize/tesla/model_s/tesla_model_s_182016.jpg",2200,new BigDecimal("50000.00"),TransmissionType.AUTOMATIC,2000,modelMapper.map(modelService.findById(teslaModel1),ModelDto.class),userService.findByUsername(user1));
+        OfferDto offerDto5 = new OfferDto("Протеккает крыша",EngineType.ELECTRIC,"https://avatars.mds.yandex.net/get-verba/1540742/2a0000017761d1c8de5ba80a8148f180432f/cattouch",1223,new BigDecimal("5000000.00"),TransmissionType.AUTOMATIC,2000,modelMapper.map(modelService.findById(teslaModel2),ModelDto.class),userService.findByUsername(user5));
+        OfferDto offerDto6 = new OfferDto("Не работают тормаза, продаю со скидкой",EngineType.GASOLINE,"https://autopragmat.ru/upload/delight.webpconverter/upload/iblock/fe7/n1cgecm0cfzy6f41dshweodk6jilsoeu.jpg.webp?1693040709143612",20120,new BigDecimal("12312310.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(fordModel2),ModelDto.class),userService.findByUsername(user6));
+        OfferDto offerDto7 = new OfferDto("Новая, не бита, не крашена!",EngineType.GASOLINE,"https://autoreview.ru/images/Article/1658/Article_165836_860_575.jpg",20220,new BigDecimal("10000000.00"),TransmissionType.MANUAL,2000,modelMapper.map(modelService.findById(bmwModel2),ModelDto.class),userService.findByUsername(user7));
 //
         offerService.save(offerDto4);
         offerService.save(offerDto5);

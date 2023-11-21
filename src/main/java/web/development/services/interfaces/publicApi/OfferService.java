@@ -19,5 +19,7 @@ public interface OfferService<ID> {
 
     List<OfferOutputDto> findOffersByPriceBetween(BigDecimal startPrice, BigDecimal endPrice);
 
+    List<OfferOutputDto> findFilteredOffers(String brandName,String engineType,String modelType,String transmission);
+
 
 }

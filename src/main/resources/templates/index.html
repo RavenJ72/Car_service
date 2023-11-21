@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:insert="blocks/headParams :: headParams">
+
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+
+<div class="car-filter-container">
+    <h2>Фильтр автомобилей</h2><b></b>
+    <form id="car-filter-form">
+
+        <div class="form-row">
+            <div class="col">
+                <label for="brand-select">Марка:</label>
+                <select class="form-control" id="brand-select" name="brand">
+                    <option value="">Любая</option>
+                    <div th:each="brand : ${brands}">
+                        <option th:value="${brand.name}" th:text="${brand.name}"></option>
+                    </div>
+
+                </select>
+            </div>
+
+
+            <div class="col"><label for="engine-type-select">Двигатель:</label>
+                <select class="form-control" id="engine-type-select" name="engineType">
+                    <option value="">Любой</option>
+                    <option value="GASOLINE">Бензиновый</option>
+                    <option value="DIESEL">Дизельный</option>
+                    <option value="ELECTRIC">Электрический</option>
+                    <option value="HYBRID">Гибридный</option>
+                </select>
+            </div>
+
+            <div class="col"><label for="model-type-select">Категория:</label>
+                <select class="form-control" id="model-type-select" name="modelType">
+                    <option value="">Любая</option>
+                    <option value="CAR">Легковой автомобиль</option>
+                    <option value="BUSS">Автобус</option>
+                    <option value="TRUCK">Грузовик</option>
+                    <option value="MOTORCYCLE">Мотоцикл</option>
+                </select>
+            </div>
+
+
+            <div class="col"><label for="transmission-select">Трансмиссия:</label>
+                <select class="form-control" id="transmission-select" name="transmission">
+                    <option value="">Любая</option>
+                    <option value="MANUAL">Механическая</option>
+                    <option value="AUTOMATIC">Автоматическая</option>
+                </select>
+            </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary">Применить фильтр</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</div>
+<div class="container">
+
+
+    <div th:each="offer : ${offers}" class="card">
+
+        <img th:src="${offer.imageUrl}" class="card-img-top" alt="Изображение автомобиля"/>
+        <div class="card-body">
+            <h5 class="card-title" th:text="${offer.model.brand_name} + ' ' + ${offer.model.name}"></h5>
+            <p class="card-text" th:text="${offer.description}"></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="'Двигатель: ' + ${offer.engine}"></li>
+                <li class="list-group-item" th:text="'Пробег: ' + ${offer.mileage} + ' км'"></li>
+                <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
+            </ul>
+            <div class="card-footer">
+                <small class="text-muted" th:text="'Продавец: ' + 'тут будет продавец'"></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

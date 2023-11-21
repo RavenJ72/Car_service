@@ -16,4 +16,25 @@ public enum EngineType {
     public int getEngineTypeCode() {
         return engineTypeCode;
     }
+
+    public static Integer getEngineTypeCodeFromString(String engineTypeName) {
+        for (EngineType engineType : EngineType.values()) {
+            if (engineType.name().equalsIgnoreCase(engineTypeName)) {
+                return engineType.getEngineTypeCode();
+            }
+        }
+        return null;
+    }
+
+    public static EngineType fromEngineTypeCode(Integer code) {
+        if (code == null) {
+            return null;
+        }
+        for (EngineType engineType : EngineType.values()) {
+            if (engineType.getEngineTypeCode() == code) {
+                return engineType;
+            }
+        }
+        throw new IllegalArgumentException("No EngineType with code " + code + " found");
+    }
 }

@@ -1,4 +1,4 @@
-package web.development.controllers;
+package web.development.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,7 @@ import web.development.services.interfaces.publicApi.BrandService;
 
 import java.util.List;
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/api/brand")
 public class BrandController {
     private final BrandService brandService;
     @Autowired

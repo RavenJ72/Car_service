@@ -1,7 +1,9 @@
 package web.development.services.dto.output;
 
+import web.development.models.entities.Model;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
+import web.development.services.dto.input.ModelDto;
 
 import java.math.BigDecimal;
 
@@ -23,10 +25,10 @@ public class OfferOutputDto {
 
     public Integer year;
 
-    public String model_id;
+    public ModelOutputDto model;
     public String seller_id;
 
-    public OfferOutputDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, String model_id, String seller_id) {
+    public OfferOutputDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelOutputDto model, String seller_id) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -34,7 +36,7 @@ public class OfferOutputDto {
         this.price = price;
         this.transmission = transmission;
         this.year = year;
-        this.model_id = model_id;
+        this.model = model;
         this.seller_id = seller_id;
     }
 
@@ -97,12 +99,21 @@ public class OfferOutputDto {
         this.year = year;
     }
 
-    public String getModel_id() {
-        return model_id;
+
+    public ModelOutputDto getModel() {
+        return model;
     }
 
-    public void setModel_id(String model_id) {
-        this.model_id = model_id;
+    public void setModel(ModelOutputDto model) {
+        this.model = model;
+    }
+
+    public String getSeller_id() {
+        return seller_id;
+    }
+
+    public void setSeller_id(String seller_id) {
+        this.seller_id = seller_id;
     }
 
     @Override
@@ -115,16 +126,8 @@ public class OfferOutputDto {
                 ", price=" + price +
                 ", transmission=" + transmission +
                 ", year=" + year +
-                ", model_id=" + model_id +
-                ", seller_id=" + seller_id +
+                ", model=" + model +
+                ", seller_id='" + seller_id + '\'' +
                 '}';
-    }
-
-    public String getSeller_id() {
-        return seller_id;
-    }
-
-    public void setSeller_id(String seller_id) {
-        this.seller_id = seller_id;
     }
 }

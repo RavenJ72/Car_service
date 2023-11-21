@@ -79,6 +79,8 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
         return userRepository.findAll().stream().map(e -> modelMapper.map(e, UserOutputDto.class)).collect(Collectors.toList());
     }
 
+
+
     @Override
     public void deleteById(String id) {
         userRepository.deleteById(id);

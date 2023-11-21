@@ -1,4 +1,4 @@
-package web.development.controllers;
+package web.development.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ import web.development.services.interfaces.publicApi.ModelService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/model")
+@RequestMapping("/api/model")
 public class ModelController {
     private final ModelService modelService;
     @Autowired
@@ -32,4 +32,8 @@ public class ModelController {
     public  List<ModelOutputDto> findByBrandName(@RequestParam String brandName){
         return modelService.findByBrandName(brandName);
     }
+
+
+
+
 }
