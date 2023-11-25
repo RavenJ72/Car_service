@@ -1,8 +1,7 @@
 package web.development.services.interfaces.publicApi;
 
-import web.development.models.entities.Offer;
 import web.development.services.dto.input.OfferDto;
-import web.development.services.dto.output.OfferOutputDto;
+import web.development.services.dto.view.OfferOutputDto;
 
 import java.math.BigDecimal;
 import java.util.List;

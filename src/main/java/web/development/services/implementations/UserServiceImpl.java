@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.models.enums.RoleType;
 import web.development.services.dto.input.UserDto;
-import web.development.services.dto.output.UserOutputDto;
+import web.development.services.dto.view.UserOutputDto;
 import web.development.models.entities.User;
 import web.development.repositories.UserRepository;
 import web.development.services.exceptions.NotFoundException;
@@ -15,7 +15,6 @@ import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.RoleInternalService;
 import web.development.services.interfaces.internalApi.UserInternalService;
 import web.development.services.interfaces.publicApi.UserService;
-import web.development.util.ValidationUtilImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,33 +26,19 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
-    private final ValidationUtilImpl validationUtil;
+
     private final RoleInternalService roleInternalService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil, RoleInternalService roleInternalService) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper,RoleInternalService roleInternalService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
-        this.validationUtil = validationUtil;
         this.roleInternalService = roleInternalService;
     }
 
     @Override
     public UserDto save(UserDto userDto) {
 
-
-        if (!this.validationUtil.isValid(userDto)) {
-            String exceptionMessage = "The data is not valid:\n";
-            List<String> validationErrors = new ArrayList<>(this.validationUtil
-                    .violations(userDto)
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toList()));
-
-            exceptionMessage += String.join("\n", validationErrors);
-            throw new ValidationException(exceptionMessage);
-
-        } else {
             try {
                 User user = modelMapper.map(userDto,User.class);
                 user.setRole(roleInternalService.findByRoleType(RoleType.fromString(userDto.getRole())));
@@ -62,7 +47,7 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
             } catch (Exception e) {
                 throw new SaveException("Failed to save the user.");
             }
-        }
+
     }
 
     @Override

@@ -11,7 +11,6 @@ import web.development.services.exceptions.SaveException;
 import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.BrandInternalService;
 import web.development.services.interfaces.publicApi.BrandService;
-import web.development.util.ValidationUtilImpl;
 import jakarta.validation.ConstraintViolation;
 
 import java.util.ArrayList;
@@ -26,37 +25,23 @@ public class BrandServiceImpl implements BrandService<String>, BrandInternalServ
 
     private final BrandRepository brandRepository;
     private final ModelMapper modelMapper;
-    private final ValidationUtilImpl validationUtil;
+
     @Autowired
-    public BrandServiceImpl(BrandRepository brandRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil) {
+    public BrandServiceImpl(BrandRepository brandRepository, ModelMapper modelMapper) {
         this.brandRepository = brandRepository;
         this.modelMapper = modelMapper;
-        this.validationUtil = validationUtil;
     }
 
     @Override
     public BrandDto save(String brandName) {
         BrandDto brand = new BrandDto(brandName);
-
-        if (!this.validationUtil.isValid(brand)) {
-            String exceptionMessage = "The data is not valid:\n";
-            List<String> validationErrors = new ArrayList<>(this.validationUtil
-                    .violations(brand)
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toList()));
-
-            exceptionMessage += String.join("\n", validationErrors);
-            throw new ValidationException(exceptionMessage);
-
-        } else {
             try {
                 return modelMapper.map(brandRepository.saveAndFlush(modelMapper.map(brand, Brand.class)), BrandDto.class);
             } catch (Exception e) {
                 throw new SaveException("Failed to save the object.");
 
             }
-        }
+
     }
 
     @Override

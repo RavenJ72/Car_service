@@ -11,9 +11,9 @@ import web.development.models.entities.Model;
 import web.development.models.entities.Offer;
 import web.development.models.entities.User;
 import web.development.services.dto.input.UserDto;
-import web.development.services.dto.output.ModelOutputDto;
-import web.development.services.dto.output.OfferOutputDto;
-import web.development.services.dto.output.UserOutputDto;
+import web.development.services.dto.view.ModelOutputDto;
+import web.development.services.dto.view.OfferOutputDto;
+import web.development.services.dto.view.UserOutputDto;
 
 
 @Configuration

@@ -1,8 +1,7 @@
 package web.development.services.interfaces.publicApi;
 
-import web.development.models.entities.User;
 import web.development.services.dto.input.UserDto;
-import web.development.services.dto.output.UserOutputDto;
+import web.development.services.dto.view.UserOutputDto;
 
 import java.util.List;
 

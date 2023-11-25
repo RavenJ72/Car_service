@@ -1,9 +1,7 @@
-package web.development.services.dto.output;
+package web.development.services.dto.view;
 
-import web.development.models.entities.Model;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
-import web.development.services.dto.input.ModelDto;
 
 import java.math.BigDecimal;
 

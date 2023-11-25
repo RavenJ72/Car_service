@@ -6,7 +6,7 @@ import web.development.models.enums.RoleType;
 import jakarta.validation.constraints.NotNull;
 
 public class RoleDto extends BaseEntityDto {
-    @NotNull(message = "Role cannot be null")
+
     private RoleType role;
 
     public RoleDto(RoleType role) {
@@ -15,7 +15,7 @@ public class RoleDto extends BaseEntityDto {
 
     public RoleDto() {
     }
-
+    @NotNull(message = "Role cannot be null")
     public RoleType getRole() {
         return role;
     }

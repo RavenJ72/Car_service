@@ -2,10 +2,8 @@ package web.development.controllers.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.input.OfferDto;
-import web.development.services.dto.output.ModelOutputDto;
-import web.development.services.dto.output.OfferOutputDto;
+import web.development.services.dto.view.OfferOutputDto;
 import web.development.services.interfaces.publicApi.OfferService;
 
 import java.math.BigDecimal;

@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.development.services.dto.input.ModelDto;
-import web.development.services.dto.output.ModelOutputDto;
+import web.development.services.dto.view.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
 import web.development.services.exceptions.NotFoundException;
@@ -13,7 +13,6 @@ import web.development.services.exceptions.SaveException;
 import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.ModelInternalService;
 import web.development.services.interfaces.publicApi.ModelService;
-import web.development.util.ValidationUtilImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,36 +24,22 @@ public class ModelServiceImpl implements ModelService<String>, ModelInternalServ
 
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
-    private final ValidationUtilImpl validationUtil;
+
 
     @Autowired
-    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper, ValidationUtilImpl validationUtil) {
+    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper) {
         this.modelRepository = modelRepository;
         this.modelMapper = modelMapper;
-        this.validationUtil = validationUtil;
+
     }
 
     @Override
     public ModelDto save(ModelDto model) {
-
-        if (!this.validationUtil.isValid(model)) {
-            String exceptionMessage = "The data is not valid:\n";
-            List<String> validationErrors = new ArrayList<>(this.validationUtil
-                    .violations(model)
-                    .stream()
-                    .map(ConstraintViolation::getMessage)
-                    .collect(Collectors.toList()));
-
-            exceptionMessage += String.join("\n", validationErrors);
-            throw new ValidationException(exceptionMessage);
-
-        } else {
             try {
                 return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
             } catch (Exception e) {
                 throw new SaveException("Failed to save the model.");
             }
-        }
     }
 
     @Override

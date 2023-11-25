@@ -1,4 +1,4 @@
-package web.development.services.dto.output;
+package web.development.services.dto.view;
 
 import web.development.models.enums.ModelCategory;
 

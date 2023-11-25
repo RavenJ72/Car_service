@@ -11,32 +11,15 @@ import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public class OfferDto extends BaseEntityDto {
-    @NotBlank(message = "Description cannot be blank")
+
     private String description;
-
-    @NotNull(message = "Engine type cannot be null")
     private EngineType engine;
-
-    @NotBlank(message = "Image URL cannot be blank")
     private String imageUrl;
-
-    @Positive(message = "Mileage must be a positive number")
     private Integer mileage;
-
-    @NotNull(message = "Price cannot be null")
-    @Positive(message = "Price must be a positive number")
     private BigDecimal price;
-
-    @NotNull(message = "Transmission type cannot be null")
     private TransmissionType transmission;
-
-    @Positive(message = "Year must be a positive number")
     private Integer year;
-
-    @NotNull(message = "Model cannot be null")
     private ModelDto model;
-
-    @NotNull(message = "Seller cannot be null")
     private UserDto seller;
 
     public OfferDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
@@ -53,7 +36,7 @@ public class OfferDto extends BaseEntityDto {
 
     public OfferDto() {
     }
-
+    @NotBlank(message = "Description cannot be blank")
     public String getDescription() {
         return description;
     }
@@ -61,7 +44,7 @@ public class OfferDto extends BaseEntityDto {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    @NotNull(message = "Engine type cannot be null")
     public EngineType getEngine() {
         return engine;
     }
@@ -69,7 +52,7 @@ public class OfferDto extends BaseEntityDto {
     public void setEngine(EngineType engine) {
         this.engine = engine;
     }
-
+    @NotBlank(message = "Image URL cannot be blank")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -77,7 +60,8 @@ public class OfferDto extends BaseEntityDto {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
+    @NotNull(message = "Mileage cannot be null")
+    @Positive(message = "Mileage must be a positive number")
     public Integer getMileage() {
         return mileage;
     }
@@ -85,7 +69,8 @@ public class OfferDto extends BaseEntityDto {
     public void setMileage(Integer mileage) {
         this.mileage = mileage;
     }
-
+    @NotNull(message = "Price cannot be null")
+    @Positive(message = "Price must be a positive number")
     public BigDecimal getPrice() {
         return price;
     }
@@ -93,7 +78,7 @@ public class OfferDto extends BaseEntityDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
+    @NotNull(message = "Transmission type cannot be null")
     public TransmissionType getTransmission() {
         return transmission;
     }
@@ -101,7 +86,8 @@ public class OfferDto extends BaseEntityDto {
     public void setTransmission(TransmissionType transmission) {
         this.transmission = transmission;
     }
-
+    @NotNull(message = "Year type cannot be null")
+    @Positive(message = "Year must be a positive number")
     public Integer getYear() {
         return year;
     }
@@ -109,7 +95,7 @@ public class OfferDto extends BaseEntityDto {
     public void setYear(Integer year) {
         this.year = year;
     }
-
+    @NotNull(message = "Model cannot be null")
     public ModelDto getModel() {
         return model;
     }
@@ -117,7 +103,7 @@ public class OfferDto extends BaseEntityDto {
     public void setModel(ModelDto model) {
         this.model = model;
     }
-
+    @NotNull(message = "Seller cannot be null")
     public UserDto getSeller() {
         return seller;
     }
