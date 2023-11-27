@@ -103,7 +103,7 @@ public class Offer extends TimeBaseEntity {
         return model;
     }
 
-    private void setModel(Model model) {
+    public void setModel(Model model) {
         this.model = model;
     }
 
@@ -111,7 +111,7 @@ public class Offer extends TimeBaseEntity {
         return seller;
     }
 
-    private void setSeller(User seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 }

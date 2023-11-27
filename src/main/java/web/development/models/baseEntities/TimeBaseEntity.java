@@ -7,13 +7,14 @@ import java.time.LocalDateTime;
 
 @MappedSuperclass
 public abstract class TimeBaseEntity extends BaseEntity {
-
-    private LocalDateTime created;
-
-    private LocalDateTime modified;
-
     @CreationTimestamp
     @Column(name = "created", updatable = false, columnDefinition = "TIMESTAMP(6)")
+    private LocalDateTime created;
+    @UpdateTimestamp
+    @Column(name = "modified", columnDefinition = "TIMESTAMP(6)")
+    private LocalDateTime modified;
+
+
     public LocalDateTime getCreated() {
         return created;
     }
@@ -21,8 +22,7 @@ public abstract class TimeBaseEntity extends BaseEntity {
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
-    @UpdateTimestamp
-    @Column(name = "modified", columnDefinition = "TIMESTAMP(6)")
+
     public LocalDateTime getModified() {
         return modified;
     }

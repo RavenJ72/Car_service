@@ -19,10 +19,10 @@ public class OfferDto extends BaseEntityDto {
     private BigDecimal price;
     private TransmissionType transmission;
     private Integer year;
-    private ModelDto model;
-    private UserDto seller;
+    private String model_id;
+    private String seller;
 
-    public OfferDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, ModelDto model, UserDto seller) {
+    public OfferDto(String description, EngineType engine, String imageUrl, Integer mileage, BigDecimal price, TransmissionType transmission, Integer year, String model, String seller) {
         this.description = description;
         this.engine = engine;
         this.imageUrl = imageUrl;
@@ -30,7 +30,7 @@ public class OfferDto extends BaseEntityDto {
         this.price = price;
         this.transmission = transmission;
         this.year = year;
-        this.model = model;
+        this.model_id = model;
         this.seller = seller;
     }
 
@@ -96,19 +96,34 @@ public class OfferDto extends BaseEntityDto {
         this.year = year;
     }
     @NotNull(message = "Model cannot be null")
-    public ModelDto getModel() {
-        return model;
+    public String getModel() {
+        return model_id;
     }
 
-    public void setModel(ModelDto model) {
-        this.model = model;
+    public void setModel(String model) {
+        this.model_id = model;
     }
     @NotNull(message = "Seller cannot be null")
-    public UserDto getSeller() {
+    public String getSeller() {
         return seller;
     }
 
-    public void setSeller(UserDto seller) {
+    public void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    @Override
+    public String toString() {
+        return "OfferDto{" +
+                "description='" + description + '\'' +
+                ", engine=" + engine +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", mileage=" + mileage +
+                ", price=" + price +
+                ", transmission=" + transmission +
+                ", year=" + year +
+                ", model=" + model_id +
+                ", seller=" + seller +
+                '}';
     }
 }

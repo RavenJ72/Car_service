@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head th:replace="blocks/headParams">
+</head>
+
+<body>
+<header th:replace="blocks/header"></header>
+<div class="container">
+    <div class="form-add">
+        <div class="justify-content-center">
+            <h1>Add Offer</h1>
+        </div>
+        <form th:action="@{/offer/add}"
+              th:method="post"
+              th:object="${offerDto}"
+              class="m-md-auto w-50 pb-3">
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <input th:field="*{description}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control text-center"
+                       id="description" aria-describedby="description"/>
+                <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="engine">Engine Type</label>
+                <select th:field="*{engine}" class="form-control text-center" id="engine">
+                    <option value="GASOLINE">GASOLINE</option>
+                    <option value="DIESEL">DIESEL</option>
+                    <option value="ELECTRIC">ELECTRIC</option>
+                    <option value="HYBRID">HYBRID</option>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="imageUrl">Image URL</label>
+                <input th:field="*{imageUrl}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control text-center"
+                       id="imageUrl" aria-describedby="imageUrl"/>
+                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="mileage">Mileage</label>
+                <input th:field="*{mileage}"
+                       th:errorclass="is-invalid"
+                       type="number" class="form-control text-center"
+                       id="mileage" aria-describedby="mileage"/>
+                <small th:if="${#fields.hasErrors('mileage')}" th:errors="*{mileage}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="price">Price</label>
+                <input th:field="*{price}"
+                       th:errorclass="is-invalid"
+                       type="number" class="form-control text-center"
+                       id="price" aria-describedby="price"/>
+                <small th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="transmission">Transmission Type</label>
+                <select th:field="*{transmission}" class="form-control text-center" id="transmission">
+                    <option value="MANUAL">Manual</option>
+                    <option value="AUTOMATIC">Automatic</option>
+                </select>
+
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="year">Year</label>
+                <input th:field="*{year}"
+                       th:errorclass="is-invalid"
+                       type="number" class="form-control text-center"
+                       id="year" aria-describedby="year"/>
+                <small th:if="${#fields.hasErrors('year')}" th:errors="*{year}"
+                       class="text-danger"></small>
+            </div>
+
+            <div class="mb-3">
+                <label for="model-select">Model</label>
+                <select th:field="*{model}" class="form-control" id="model-select" name="model">
+                    <div th:each="modelDto : ${models}">
+                        <option th:value="${modelDto.id}" th:text="${modelDto.brand_name} + ' ' + ${modelDto.name}"></option>
+                    </div>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="user-select">Seller</label>
+                <select th:field="*{seller}" class="form-control" id="user-select" name="user">
+                    <div th:each="user : ${users}">
+                        <option th:value="${user.username}" th:text="${user.username}"></option>
+                    </div>
+                </select>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-secondary">Add Offer</button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

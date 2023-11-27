@@ -1,26 +1,26 @@
 package web.development.services.implementations;
 
-import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import web.development.models.entities.User;
 import web.development.models.enums.EngineType;
 import web.development.models.enums.ModelCategory;
 import web.development.models.enums.TransmissionType;
+import web.development.repositories.ModelRepository;
+import web.development.repositories.UserRepository;
 import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.view.OfferOutputDto;
 import web.development.models.entities.Offer;
 import web.development.repositories.OfferRepository;
 import web.development.services.exceptions.NotFoundException;
 import web.development.services.exceptions.SaveException;
-import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.OfferInternalService;
 import web.development.services.interfaces.publicApi.OfferService;
 import web.development.services.specifications.OfferSpecification;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,18 +30,27 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
 
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelRepository modelRepository;
 
 
     @Autowired
-    public OfferServiceImpl(OfferRepository offerRepository, ModelMapper modelMapper) {
+    public OfferServiceImpl(OfferRepository offerRepository, ModelMapper modelMapper, UserRepository userRepository, ModelRepository modelRepository) {
         this.offerRepository = offerRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
+        this.modelRepository = modelRepository;
     }
 
     @Override
-    public OfferDto save(OfferDto offer) {
+    public OfferDto save(OfferDto offerDto) {
             try {
-                return modelMapper.map(offerRepository.saveAndFlush(modelMapper.map(offer, Offer.class)), OfferDto.class);
+
+                Offer offer = modelMapper.map(offerDto, Offer.class);
+                offer.setSeller(userRepository.findByUsername(offerDto.getSeller()));
+                offer.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
+
+                return modelMapper.map(offerRepository.saveAndFlush(offer), OfferDto.class);
             } catch (Exception e) {
                 throw new SaveException("Failed to save the object.");
             }

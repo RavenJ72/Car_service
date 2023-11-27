@@ -3,6 +3,7 @@ package web.development.services.dto.view;
 import web.development.models.enums.ModelCategory;
 
 public class ModelOutputDto {
+    public String id;
     public String name;
     public ModelCategory category;
     public String imageUrl;
