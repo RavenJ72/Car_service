@@ -40,15 +40,11 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
 
     @Override
     public OfferDto save(OfferDto offer) {
-
-
-
             try {
                 return modelMapper.map(offerRepository.saveAndFlush(modelMapper.map(offer, Offer.class)), OfferDto.class);
             } catch (Exception e) {
                 throw new SaveException("Failed to save the object.");
             }
-
     }
 
     @Override
@@ -60,9 +56,15 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
         return (Offer) offer.get();
     }
 
+
     @Override
     public List<OfferOutputDto> findAll() {
         return offerRepository.findAll().stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public OfferOutputDto findOfferDetailsById(String id) {
+        return modelMapper.map(offerRepository.findById(id), OfferOutputDto.class);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.development.services.interfaces.publicApi.BrandService;
@@ -37,8 +38,17 @@ public class MainController {
 
         model.addAttribute("offers",offerService.findFilteredOffers(brand,engineType,modelType,transmission));
         model.addAttribute("brands",brandService.findAll());
-        System.out.println(brand + " " + engineType);
         return "index";
+    }
+
+    @GetMapping("/offer/{id}")
+    public String offerDetails(@PathVariable("id") String id, Model model){
+
+        model.addAttribute("title","Car Service - Offer details page");
+        model.addAttribute("offer",offerService.findOfferDetailsById(id));
+        System.out.println(offerService.findOfferDetailsById(id).description);
+
+        return "offer-details";
     }
 
 

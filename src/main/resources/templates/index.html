@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
-<head th:insert="blocks/headParams :: headParams">
+<head th:replace="blocks/headParams" >
 
 </head>
 <body>
-<header th:insert="blocks/header :: header"></header>
+<heder th:replace="blocks/header"></heder>
 
 
 <div class="car-filter-container">
@@ -63,23 +63,19 @@
 
 </div>
 <div class="container">
-
-
     <div th:each="offer : ${offers}" class="card">
 
-        <img th:src="${offer.imageUrl}" class="card-img-top" alt="Изображение автомобиля"/>
-        <div class="card-body">
-            <h5 class="card-title" th:text="${offer.model.brand_name} + ' ' + ${offer.model.name}"></h5>
-            <p class="card-text" th:text="${offer.description}"></p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="'Двигатель: ' + ${offer.engine}"></li>
-                <li class="list-group-item" th:text="'Пробег: ' + ${offer.mileage} + ' км'"></li>
-                <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
-            </ul>
-            <div class="card-footer">
-                <small class="text-muted" th:text="'Продавец: ' + 'тут будет продавец'"></small>
+        <a th:href="@{/offer/{id}(id=${offer.id})}" class="custom-link">
+            <img th:src="${offer.imageUrl}" class="card-img-top" alt="Изображение автомобиля"/>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${offer.model.brand_name} + ' ' + ${offer.model.name}"></h5>
+                <p class="card-text" th:text="${offer.description}"></p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:text="'Двигатель: ' + ${offer.engine}"></li>
+                    <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
+                </ul>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 

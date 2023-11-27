@@ -5,12 +5,15 @@ import web.development.services.dto.view.OfferOutputDto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public interface OfferService<ID> {
 
     OfferDto save(OfferDto offer);  // Create/Update
 
     List<OfferOutputDto> findAll();  // Read
+
+    OfferOutputDto findOfferDetailsById(String id);
 
     List<OfferOutputDto> findOffersByBrandName(String brandName);
 

@@ -29,8 +29,6 @@ public class UserDto extends BaseEntityDto {
         this.role = role;
     }
 
-
-
     public UserDto() {
     }
     @NotEmpty(message = "Username cannot be empty")
@@ -74,7 +72,7 @@ public class UserDto extends BaseEntityDto {
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
     }
-
+    @NotEmpty(message = "Url cannot be empty")
     public String getImageUrl() {
         return imageUrl;
     }
