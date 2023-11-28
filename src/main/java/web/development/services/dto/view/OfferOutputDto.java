@@ -2,13 +2,12 @@ package web.development.services.dto.view;
 
 import web.development.models.enums.EngineType;
 import web.development.models.enums.TransmissionType;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 
 import java.math.BigDecimal;
 
 
-public class OfferOutputDto {
-    public String id;
-
+public class OfferOutputDto extends BaseEntityDto {
 
     public String description;
 

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import web.development.models.entities.Model;
 import web.development.models.entities.Offer;
 import web.development.models.entities.User;
@@ -19,12 +20,6 @@ import web.development.services.dto.view.UserOutputDto;
 @Configuration
 public class ApplicationBeanConfiguration {
 
-    @Bean
-    public Validator validator(){
-        return Validation
-                .buildDefaultValidatorFactory()
-                .getValidator();
-    }
 
     @Bean
     public ModelMapper modelMapper(){
@@ -46,7 +41,7 @@ public class ApplicationBeanConfiguration {
 
         // UserOutPutDto
         TypeMap<User, UserOutputDto> typeMapUser = modelMapper.createTypeMap(User.class, UserOutputDto.class);
-        typeMapUser.addMappings(m->m.map(src -> src.getRole().getId(), UserOutputDto::setRole_id));
+        typeMapUser.addMappings(m->m.map(src -> src.getRole().getRole(), UserOutputDto::setRole_id));
 
         TypeMap<User, UserDto> typeMapUserToDto = modelMapper.createTypeMap(User.class, UserDto.class);
         typeMapUserToDto.addMappings(m->m.map(src -> src.getRole().getRole(), UserDto::setRole));
@@ -54,5 +49,11 @@ public class ApplicationBeanConfiguration {
 
 
         return modelMapper;
+    }
+
+    @Bean
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
+        return validatorFactoryBean;
     }
 }

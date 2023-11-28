@@ -9,9 +9,9 @@
 <div class="container">
     <div class="form-add">
         <div class="justify-content-center">
-            <h1>Add Offer</h1>
+            <h1>Edit Offer</h1>
         </div>
-        <form th:action="@{/offer/add/}"
+        <form th:action="@{/offer/edit/{id}(id=${offerDto.id})}"
               th:method="post"
               th:object="${offerDto}"
               class="m-md-auto w-50 pb-3">
@@ -111,7 +111,7 @@
 
 
 
-            <button type="submit" class="btn btn-secondary">Add Offer</button>
+            <button type="submit" class="btn btn-secondary">Edit Offer</button>
         </form>
     </div>
 </div>

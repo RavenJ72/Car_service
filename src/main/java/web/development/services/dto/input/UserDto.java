@@ -64,7 +64,7 @@ public class UserDto extends BaseEntityDto {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    @NotNull(message = "isActive cannot be null")
+
     public Boolean getIsActive() {
         return isActive;
     }
@@ -80,7 +80,7 @@ public class UserDto extends BaseEntityDto {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    @NotNull(message = "Role cannot be null")
+
     public String getRole() {
         return role;
     }

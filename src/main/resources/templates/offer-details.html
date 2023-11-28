@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 
-<head th:replace="blocks/headParams">
+<head th:replace="~{blocks/headParams}">
 <body>
-<header th:replace="blocks/header"></header>
+<header th:replace="~{blocks/header}"></header>
 
 <div class="container mt-5">
     <div class="card">
@@ -21,15 +21,10 @@
         </div>
         <div class="card-footer">
             <small class="text-muted" th:text="'Продавец ID: ' + ${offer.seller_id}"></small>
+            <button type="submit"><a th:href="@{/offer/edit/{id}(id=${offer.id})}">Edit offer</a></button>
         </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
 
 </body>
 </html>

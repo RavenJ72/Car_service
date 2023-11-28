@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+
+<head th:replace="~{blocks/headParams}">
+<body>
+<header th:replace="~{blocks/header}"></header>
+
+<div class="container">
+    <div class="card">
+        <img th:src="${user.imageUrl}" class="card-img-top" alt="Фотография"/>
+        <div class="card-body">
+            <p class="card-text" th:text="${user.username}"></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="'ID:'  + ${user.id}"></li>
+                <li class="list-group-item" th:text="'Роль: ' + ${user.role_id}"></li>
+                <li class="list-group-item" th:text="'Подтвержденный профиль: ' + ${user.isActive.toString()}"></li>
+            </ul>
+        </div>
+        <div class="card-footer">
+            <button type="submit"><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit user</a></button>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

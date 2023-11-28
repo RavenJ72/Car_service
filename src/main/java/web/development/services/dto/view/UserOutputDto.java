@@ -1,17 +1,17 @@
 package web.development.services.dto.view;
 
 
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 
-public class UserOutputDto {
-    public String id;
+public class UserOutputDto extends BaseEntityDto {
 
     public String username;
     public Boolean isActive;
+
     public String imageUrl;
     public String role_id;
 
-    public UserOutputDto(String id, String username, Boolean isActive, String imageUrl, String role_id) {
-        this.id = id;
+    public UserOutputDto(String username, Boolean isActive, String imageUrl, String role_id) {
         this.username = username;
         this.isActive = isActive;
         this.imageUrl = imageUrl;

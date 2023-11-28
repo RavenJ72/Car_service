@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="~{blocks/headParams}" >
+
+</head>
+<body>
+<header th:replace="~{blocks/header}"></header>
+
+
+<div class="container">
+    <div th:each="user : ${users}" class="card">
+
+        <a th:href="@{/user/{id}(id=${user.id})}" class="custom-link">
+            <img th:src="${user.imageUrl}" class="card-img-top" alt="Фотография"/>
+            <div class="card-body">
+                <p class="card-text" th:text="${user.username}"></p>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -45,12 +45,22 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     @Override
     public OfferDto save(OfferDto offerDto) {
             try {
+                if (offerDto.getId() != null){
+                    Offer offerEditObject = offerRepository.findById(offerDto.getId()).orElse(null);
+                    offerEditObject.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
+                    offerEditObject.setSeller(userRepository.findByUsername(offerDto.getSeller()));
+                    offerEditObject.setDescription(offerDto.getDescription());
+                    offerEditObject.setImageUrl(offerDto.getImageUrl());
 
-                Offer offer = modelMapper.map(offerDto, Offer.class);
-                offer.setSeller(userRepository.findByUsername(offerDto.getSeller()));
-                offer.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
+                    return modelMapper.map(offerRepository.saveAndFlush(offerEditObject), OfferDto.class);
 
-                return modelMapper.map(offerRepository.saveAndFlush(offer), OfferDto.class);
+                }else{
+                    Offer offer = modelMapper.map(offerDto, Offer.class);
+                    offer.setSeller(userRepository.findByUsername(offerDto.getSeller()));
+                    offer.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
+                    return modelMapper.map(offerRepository.saveAndFlush(offer), OfferDto.class);
+                }
+
             } catch (Exception e) {
                 throw new SaveException("Failed to save the object.");
             }
@@ -74,6 +84,11 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     @Override
     public OfferOutputDto findOfferDetailsById(String id) {
         return modelMapper.map(offerRepository.findById(id), OfferOutputDto.class);
+    }
+
+    @Override
+    public OfferDto findOfferForEdit(String id) {
+        return modelMapper.map(offerRepository.findById(id), OfferDto.class);
     }
 
     @Override

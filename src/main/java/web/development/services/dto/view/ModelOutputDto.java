@@ -1,9 +1,10 @@
 package web.development.services.dto.view;
 
 import web.development.models.enums.ModelCategory;
+import web.development.services.dto.input.baseEntities.BaseEntityDto;
 
-public class ModelOutputDto {
-    public String id;
+public class ModelOutputDto extends BaseEntityDto {
+
     public String name;
     public ModelCategory category;
     public String imageUrl;

@@ -124,6 +124,7 @@ public class OfferDto extends BaseEntityDto {
                 ", year=" + year +
                 ", model=" + model_id +
                 ", seller=" + seller +
+                ", id" + super.id +
                 '}';
     }
 }

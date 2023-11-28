@@ -15,6 +15,8 @@ public interface OfferService<ID> {
 
     OfferOutputDto findOfferDetailsById(String id);
 
+    OfferDto findOfferForEdit(String id);
+
     List<OfferOutputDto> findOffersByBrandName(String brandName);
 
     List<OfferOutputDto> findOffersBySellerUsername(String username);
