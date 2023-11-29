@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head th:replace="~{blocks/headParams}">
+</head>
+
+<body>
+<header th:replace="~{blocks/header}"></header>
+<div class="container">
+
+    <div class="form-add">
+
+        <div class="justify-content-center">
+            <h1>Add Model</h1>
+        </div>
+        <form th:action="@{/model/add/}"
+              th:method="post"
+              th:object="${modelDto}"
+              class="m-md-auto w-50 pb-3">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">Name</label>
+                <input th:field="*{name}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control text-center"
+                       id="name" aria-describedby="name"/>
+                <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="category">Category</label>
+                <select th:field="*{category}" class="form-control text-center" id="category">
+                    <option value="CAR">CAR</option>
+                    <option value="BUSS">BUSS</option>
+                    <option value="TRUCK">TRUCK</option>
+                    <option value="MOTORCYCLE">MOTORCYCLE</option>
+                </select>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="imageUrl">Image URL</label>
+                <input th:field="*{imageUrl}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control text-center"
+                       id="imageUrl" aria-describedby="imageUrl"/>
+                <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label" for="startYear">Start Year</label>
+                <input th:field="*{startYear}"
+                       th:errorclass="is-invalid"
+                       type="number" class="form-control text-center"
+                       id="startYear" aria-describedby="startYear"/>
+                <small th:if="${#fields.hasErrors('startYear')}" th:errors="*{startYear}"
+                       class="text-danger"></small>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="endYear">End Year</label>
+                <input th:field="*{endYear}"
+                       th:errorclass="is-invalid"
+                       type="number" class="form-control text-center"
+                       id="endYear" aria-describedby="endYear"/>
+                <small th:if="${#fields.hasErrors('endYear')}" th:errors="*{endYear}"
+                       class="text-danger"></small>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="model-select">Brand</label>
+                <select th:field="*{brand}" class="form-control" id="model-select" name="model">
+                    <div th:each="brand : ${brands}">
+                        <option th:value="${brand.name}" th:text="${brand.name}"></option>
+                    </div>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Add Model</button>
+        </form>
+    </div>
+
+</div>
+
+<div class="container">
+    <div th:each="model : ${models}" class="card">
+        <img th:src="${model.imageUrl}" class="card-img-top" alt="Изображение модели"/>
+        <div class="card-body">
+            <p class="card-text" th:text="${model.name}"></p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="'Категория: ' + ${model.category}"></li>
+                <li class="list-group-item" th:text="'Бренд: ' + ${model.brand_name}"></li>
+                <li class="list-group-item" th:text="'Год производства: ' + ${model.startYear}"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

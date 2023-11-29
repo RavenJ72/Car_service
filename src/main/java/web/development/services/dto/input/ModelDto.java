@@ -21,12 +21,12 @@ public class ModelDto extends BaseEntityDto {
 
     private Integer endYear;
 
-    private BrandDto brand;
+    private String brand;
 
     public ModelDto() {
     }
 
-    public ModelDto(String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, BrandDto brand) {
+    public ModelDto(String name, ModelCategory category, String imageUrl, Integer startYear, Integer endYear, String brand) {
         this.name = name;
         this.category = category;
         this.imageUrl = imageUrl;
@@ -55,7 +55,7 @@ public class ModelDto extends BaseEntityDto {
         this.endYear = endYear;
     }
 
-    public void setBrand(BrandDto brand) {
+    public void setBrand(String brand) {
         this.brand = brand;
     }
 
@@ -66,7 +66,6 @@ public class ModelDto extends BaseEntityDto {
     }
 
     @NotNull(message = "Category cannot be null")
-    @Size(min = 2, max = 15, message = "Category must be between 2 and 15 characters")
     public ModelCategory getCategory() {
         return category;
     }
@@ -87,7 +86,7 @@ public class ModelDto extends BaseEntityDto {
     }
     @NotNull(message = "Brand cannot be null")
     @Size(min = 2, max = 15, message = "Brand must be between 2 and 15 characters")
-    public BrandDto getBrand() {
+    public String getBrand() {
         return brand;
     }
 

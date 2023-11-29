@@ -16,7 +16,6 @@ import web.development.services.interfaces.publicApi.OfferService;
 import web.development.services.interfaces.publicApi.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserViewController {
 
     private OfferService offerService;
@@ -41,7 +40,7 @@ public class UserViewController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/user/")
     public String usersAll(Model model){
 
         model.addAttribute("title","Car Service - All users");
@@ -50,7 +49,7 @@ public class UserViewController {
         return "user-all";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public String offerDetails(@PathVariable("id") String id, Model model){
 
         model.addAttribute("title","Car Service - User details page");
@@ -59,7 +58,7 @@ public class UserViewController {
         return "user-details";
     }
 
-    @GetMapping("/add/")
+    @GetMapping("/user/add/")
     public String addUser(Model model){
 
         return "user-add";
@@ -69,7 +68,7 @@ public class UserViewController {
         return new UserDto();
     }
 
-    @PostMapping("/add/")
+    @PostMapping("/user/add/")
     public String addUser(@Valid UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         userDto.setIsActive(false);
@@ -89,24 +88,21 @@ public class UserViewController {
 
 
     @GetMapping("/user/edit/{id}")
-    public String editOffer(@PathVariable("id") String id,Model model){
-        model.addAttribute("offerDto",offerService.findOfferForEdit(id));
-        model.addAttribute("models",modelService.findAll());
-        model.addAttribute("users",userService.findAll());
-
-        return "offer-edit";
+    public String editUser(@PathVariable("id") String id,Model model){
+        model.addAttribute("userDto",userService.findUserForEdit(id));
+        return "user-edit";
     }
     @PostMapping("/user/edit/{id}")
-    public String editOffer(@Valid OfferDto offerDto, @PathVariable("id") String id, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String editUser(@Valid UserDto userDto, @PathVariable("id") String id, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("offerDto", offerDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerDto", bindingResult);
-            return "redirect:/offer/edit/" + id;
+            redirectAttributes.addFlashAttribute("userDto", userDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userDto", bindingResult);
+            return "redirect:/user/edit/" + id;
         }
 
-        offerService.save(offerDto);
-        return "redirect:/offer/" + id;
+        userService.save(userDto);
+        return "redirect:/user/" + id;
     }
 
 }

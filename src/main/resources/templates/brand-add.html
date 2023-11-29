@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head th:replace="~{blocks/headParams}">
+</head>
+
+<body>
+<header th:replace="~{blocks/header}"></header>
+<div class="container">
+
+
+    <h1>Add brand</h1>
+    <div class="form-add">
+        <div class="justify-content-center">
+
+        </div>
+        <form th:action="@{/brand/add/}"
+              th:method="post"
+              th:object="${brandDto}"
+              class="m-md-auto w-50 pb-3">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">Name</label>
+                <input th:field="*{name}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control text-center"
+                       id="name" aria-describedby="name"/>
+                <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                       class="text-danger"></small>
+            </div>
+
+            <button type="submit" class="btn btn-secondary">Add brand</button>
+        </form>
+    </div>
+
+
+    <div th:each="brand : ${brands}" class="card">
+        <div class="card-body">
+            <p class="card-text" th:text="${brand.name}"></p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

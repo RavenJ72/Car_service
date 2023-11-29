@@ -11,7 +11,7 @@
         <div class="justify-content-center">
             <h1>Edit User</h1>
         </div>
-        <form th:action="@{/user/edit/{id}(id=${user.id})}"
+        <form th:action="@{/user/edit/{id}(id=${userDto.id})}"
               th:method="post"
               th:object="${userDto}"
               class="m-md-auto w-50 pb-3">

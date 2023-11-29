@@ -1,5 +1,7 @@
 package web.development.services.interfaces.publicApi;
 
+import web.development.models.entities.User;
+import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.input.UserDto;
 import web.development.services.dto.view.OfferOutputDto;
 import web.development.services.dto.view.UserOutputDto;
@@ -13,6 +15,8 @@ public interface UserService<ID> {
     List<UserOutputDto> findAll();  // Read
 
     UserDto findByUsername(String username);
+
+    UserDto findUserForEdit(String id);
 
     UserOutputDto findUserDetailsById(String id);
 

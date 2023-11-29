@@ -32,7 +32,7 @@ public class User extends TimeBaseEntity {
         return username;
     }
 
-    private void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
     @Column(name = "password", length = 255, nullable = false)
@@ -40,7 +40,7 @@ public class User extends TimeBaseEntity {
         return password;
     }
 
-    private void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     @Column(name = "firstName", length = 255, nullable = false)

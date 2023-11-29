@@ -1,20 +1,19 @@
 package web.development.services.implementations;
 
-import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import web.development.repositories.BrandRepository;
+import web.development.repositories.OfferRepository;
 import web.development.services.dto.input.ModelDto;
 import web.development.services.dto.view.ModelOutputDto;
 import web.development.models.entities.Model;
 import web.development.repositories.ModelRepository;
 import web.development.services.exceptions.NotFoundException;
 import web.development.services.exceptions.SaveException;
-import web.development.services.exceptions.ValidationException;
 import web.development.services.interfaces.internalApi.ModelInternalService;
 import web.development.services.interfaces.publicApi.ModelService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,18 +24,24 @@ public class ModelServiceImpl implements ModelService<String>, ModelInternalServ
     private final ModelRepository modelRepository;
     private final ModelMapper modelMapper;
 
+    private final BrandRepository brandRepository;
+
 
     @Autowired
-    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper) {
+    public ModelServiceImpl(ModelRepository modelRepository, ModelMapper modelMapper, OfferRepository offerRepository, BrandRepository brandRepository) {
         this.modelRepository = modelRepository;
         this.modelMapper = modelMapper;
 
+
+        this.brandRepository = brandRepository;
     }
 
     @Override
     public ModelDto save(ModelDto model) {
             try {
-                return modelMapper.map(modelRepository.saveAndFlush(modelMapper.map(model, Model.class)), ModelDto.class);
+                Model modelForSave = modelMapper.map(model,Model.class);
+                modelForSave.setBrand(brandRepository.findByName(model.getBrand()));
+                return modelMapper.map(modelRepository.saveAndFlush(modelForSave), ModelDto.class);
             } catch (Exception e) {
                 throw new SaveException("Failed to save the model.");
             }

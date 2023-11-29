@@ -40,10 +40,21 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
     public UserDto save(UserDto userDto) {
 
             try {
-                User user = modelMapper.map(userDto,User.class);
-                user.setRole(roleInternalService.findByRoleType(RoleType.fromString(userDto.getRole())));
+                if(userDto.getId() != null){
+                    User oldUser = userRepository.findById(userDto.getId()).orElse(null);
+                    oldUser.setImageUrl(userDto.getImageUrl());
+                    oldUser.setFirstName(userDto.getFirstName());
+                    oldUser.setLastName(userDto.getLastName());
+                    oldUser.setPassword(userDto.getPassword());
+                    oldUser.setUsername(userDto.getUsername());
+                    return modelMapper.map(userRepository.saveAndFlush(oldUser), UserDto.class);
 
-                return modelMapper.map(userRepository.saveAndFlush(user), UserDto.class);
+                }else{
+                    User user = modelMapper.map(userDto,User.class);
+                    user.setRole(roleInternalService.findByRoleType(RoleType.fromString(userDto.getRole())));
+                    return modelMapper.map(userRepository.saveAndFlush(user), UserDto.class);
+                }
+
             } catch (Exception e) {
                 throw new SaveException("Failed to save the user.");
             }
@@ -78,6 +89,11 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
             throw new NotFoundException("User with this username not found");
         }
         return modelMapper.map(user,UserDto.class);
+    }
+
+    @Override
+    public UserDto findUserForEdit(String id) {
+        return modelMapper.map(userRepository.findById(id).orElse(null),UserDto.class);
     }
 
     @Override
