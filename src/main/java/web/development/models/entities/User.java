@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import web.development.models.baseEntities.TimeBaseEntity;
 import web.development.models.converters.RoleTypeConverter;
 
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User extends TimeBaseEntity {
+public class User extends TimeBaseEntity implements Serializable {
     private String username;
     private String password;
     private String firstName;
@@ -16,7 +17,7 @@ public class User extends TimeBaseEntity {
     private Boolean isActive;
     private String imageUrl;
 
-    @Convert(converter = RoleTypeConverter.class)
+    @Enumerated(EnumType.STRING)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;

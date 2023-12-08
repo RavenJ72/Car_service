@@ -103,7 +103,7 @@ public class OfferDto extends BaseEntityDto {
     public void setModel(String model) {
         this.model_id = model;
     }
-    @NotNull(message = "Seller cannot be null")
+    @NotNull(message = "Seller cannot be null") // убрать сказал иван!!
     public String getSeller() {
         return seller;
     }

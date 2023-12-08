@@ -48,7 +48,7 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
                 if (offerDto.getId() != null){
                     Offer offerEditObject = offerRepository.findById(offerDto.getId()).orElse(null);
                     offerEditObject.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
-                    offerEditObject.setSeller(userRepository.findByUsername(offerDto.getSeller()));
+                    offerEditObject.setSeller(userRepository.findByUsername(offerDto.getSeller()).orElse(null));
                     offerEditObject.setDescription(offerDto.getDescription());
                     offerEditObject.setImageUrl(offerDto.getImageUrl());
 
@@ -56,7 +56,7 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
 
                 }else{
                     Offer offer = modelMapper.map(offerDto, Offer.class);
-                    offer.setSeller(userRepository.findByUsername(offerDto.getSeller()));
+                    offer.setSeller(userRepository.findByUsername(offerDto.getSeller()).orElse(null));
                     offer.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
                     return modelMapper.map(offerRepository.saveAndFlush(offer), OfferDto.class);
                 }

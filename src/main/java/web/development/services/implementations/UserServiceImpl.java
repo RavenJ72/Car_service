@@ -3,6 +3,7 @@ package web.development.services.implementations;
 import jakarta.validation.ConstraintViolation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.development.models.enums.RoleType;
 import web.development.services.dto.input.UserDto;
@@ -27,12 +28,14 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
+    private final PasswordEncoder passwordEncoder;
     private final RoleInternalService roleInternalService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper,RoleInternalService roleInternalService) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleInternalService roleInternalService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
         this.roleInternalService = roleInternalService;
     }
 
@@ -45,12 +48,13 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
                     oldUser.setImageUrl(userDto.getImageUrl());
                     oldUser.setFirstName(userDto.getFirstName());
                     oldUser.setLastName(userDto.getLastName());
-                    oldUser.setPassword(userDto.getPassword());
+                    oldUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
                     oldUser.setUsername(userDto.getUsername());
                     return modelMapper.map(userRepository.saveAndFlush(oldUser), UserDto.class);
 
                 }else{
                     User user = modelMapper.map(userDto,User.class);
+                    user.setPassword(passwordEncoder.encode(userDto.getPassword()));
                     user.setRole(roleInternalService.findByRoleType(RoleType.fromString(userDto.getRole())));
                     return modelMapper.map(userRepository.saveAndFlush(user), UserDto.class);
                 }
@@ -84,7 +88,7 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
 
     @Override
     public UserDto findByUsername(String username) {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username).orElse(null);
         if(user == null){
             throw new NotFoundException("User with this username not found");
         }

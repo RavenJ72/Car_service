@@ -7,6 +7,7 @@ import web.development.models.entities.User;
 import web.development.services.dto.input.UserDto;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,7 +15,9 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     List<User> findByIsActive(Boolean isActive);
 
-    User findByUsername(String username);
+
+
+    Optional<User> findByUsername(String username);
 
 
 }

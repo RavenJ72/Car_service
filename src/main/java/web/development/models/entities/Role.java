@@ -25,7 +25,7 @@ public class Role extends BaseEntity {
     public Role(RoleType role) {
         this.role = role;
     }
-    @Convert(converter = RoleTypeConverter.class)
+    @Enumerated(EnumType.STRING)
     @Column(name = "role", length = 11, nullable = false)
     public RoleType getRole() {
         return role;
