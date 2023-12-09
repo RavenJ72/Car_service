@@ -17,30 +17,30 @@
                 <select class="form-control" id="brand-select" name="brand">
                     <option value="">Любая</option>
                     <div th:each="brand : ${brands}">
-                        <option th:value="${brand.name}" th:text="${brand.name}"></option>
+                        <option th:value="${brand.name}"
+                                th:text="${brand.name}"
+                                th:selected="${selectedBrand == brand.name}"></option>
                     </div>
-
                 </select>
             </div>
-
 
             <div class="col"><label for="engine-type-select">Двигатель:</label>
                 <select class="form-control" id="engine-type-select" name="engineType">
                     <option value="">Любой</option>
-                    <option value="GASOLINE">Бензиновый</option>
-                    <option value="DIESEL">Дизельный</option>
-                    <option value="ELECTRIC">Электрический</option>
-                    <option value="HYBRID">Гибридный</option>
+                    <option value="GASOLINE" th:selected="${selectedEngineType == 'GASOLINE'}">Бензиновый</option>
+                    <option value="DIESEL" th:selected="${selectedEngineType == 'DIESEL'}">Дизельный</option>
+                    <option value="ELECTRIC" th:selected="${selectedEngineType == 'ELECTRIC'}">Электрический</option>
+                    <option value="HYBRID" th:selected="${selectedEngineType == 'HYBRID'}">Гибридный</option>
                 </select>
             </div>
 
             <div class="col"><label for="model-type-select">Категория:</label>
                 <select class="form-control" id="model-type-select" name="modelType">
                     <option value="">Любая</option>
-                    <option value="CAR">Легковой автомобиль</option>
-                    <option value="BUSS">Автобус</option>
-                    <option value="TRUCK">Грузовик</option>
-                    <option value="MOTORCYCLE">Мотоцикл</option>
+                    <option value="CAR" th:selected="${selectedModelType == 'CAR'}">Легковой автомобиль</option>
+                    <option value="BUSS" th:selected="${selectedModelType == 'BUSS'}">Автобус</option>
+                    <option value="TRUCK" th:selected="${selectedModelType == 'TRUCK'}">Грузовик</option>
+                    <option value="MOTORCYCLE" th:selected="${selectedModelType == 'MOTORCYCLE'}">Мотоцикл</option>
                 </select>
             </div>
 
@@ -48,8 +48,8 @@
             <div class="col"><label for="transmission-select">Трансмиссия:</label>
                 <select class="form-control" id="transmission-select" name="transmission">
                     <option value="">Любая</option>
-                    <option value="MANUAL">Механическая</option>
-                    <option value="AUTOMATIC">Автоматическая</option>
+                    <option value="MANUAL" th:selected="${selectedTransmission == 'MANUAL'}">Механическая</option>
+                    <option value="AUTOMATIC" th:selected="${selectedTransmission == 'AUTOMATIC'}">Автоматическая</option>
                 </select>
             </div>
 

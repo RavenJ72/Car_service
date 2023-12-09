@@ -48,9 +48,13 @@ public class MainController {
                        Model model){
 
         model.addAttribute("title","Car Service - Main page");
-
         model.addAttribute("offers",offerService.findFilteredOffers(brand,engineType,modelType,transmission));
         model.addAttribute("brands",brandService.findAll());
+
+        model.addAttribute("selectedBrand", brand);
+        model.addAttribute("selectedEngineType", engineType);
+        model.addAttribute("selectedModelType", modelType);
+        model.addAttribute("selectedTransmission", transmission);
         return "index";
     }
 
