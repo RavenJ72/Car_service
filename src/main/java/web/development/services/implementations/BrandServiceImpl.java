@@ -2,6 +2,9 @@ package web.development.services.implementations;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 import web.development.services.dto.input.BrandDto;
 import web.development.models.entities.Brand;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@EnableCaching
 public class BrandServiceImpl implements BrandService<String>, BrandInternalService<String> {
 
 
@@ -33,6 +37,7 @@ public class BrandServiceImpl implements BrandService<String>, BrandInternalServ
     }
 
     @Override
+    @CacheEvict(cacheNames = "brands", allEntries = true)
     public BrandDto save(String brandName) {
         BrandDto brand = new BrandDto(brandName);
             try {
@@ -54,11 +59,13 @@ public class BrandServiceImpl implements BrandService<String>, BrandInternalServ
     }
 
     @Override
+    @Cacheable("brands")
     public List<BrandDto> findAll() {
         return brandRepository.findAll().stream().map(e->modelMapper.map(e,BrandDto.class)).collect(Collectors.toList());
     }
 
     @Override
+    @CacheEvict(cacheNames = "brands", allEntries = true)
     public void deleteById(String id) {
         brandRepository.deleteById(id);
     }

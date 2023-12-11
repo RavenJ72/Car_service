@@ -106,10 +106,22 @@ public class DataInitializer implements CommandLineRunner {
         offerService.save(offerDto5);
         offerService.save(offerDto6);
         offerService.save(offerDto7);
+
+
+
 //
 //        modelService.findAll().forEach(System.out::println);
 //        userService.findAll().forEach(System.out::println);
+
 //        offerService.findAll().forEach(System.out::println);
+
+
+
+
+
+
+
+
 
 
     }

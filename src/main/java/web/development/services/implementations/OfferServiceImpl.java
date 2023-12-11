@@ -2,6 +2,7 @@ package web.development.services.implementations;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import web.development.models.entities.User;
@@ -19,6 +20,9 @@ import web.development.services.exceptions.SaveException;
 import web.development.services.interfaces.internalApi.OfferInternalService;
 import web.development.services.interfaces.publicApi.OfferService;
 import web.development.services.specifications.OfferSpecification;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,6 +30,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@EnableCaching
 public class OfferServiceImpl implements OfferService<String>, OfferInternalService<String> {
 
     private final OfferRepository offerRepository;
@@ -43,6 +48,7 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     }
 
     @Override
+    @CacheEvict(cacheNames = "offers", allEntries = true)
     public OfferDto save(OfferDto offerDto) {
             try {
                 if (offerDto.getId() != null){
@@ -75,7 +81,13 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     }
 
 
+    public List<OfferOutputDto> findWithoutCash() {
+        return offerRepository.findAll().stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
+    }
+
+
     @Override
+    @Cacheable("offers")
     public List<OfferOutputDto> findAll() {
         return offerRepository.findAll().stream().map(e -> modelMapper.map(e, OfferOutputDto.class)).collect(Collectors.toList());
     }
@@ -89,8 +101,8 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
     public OfferDto findOfferForEdit(String id) {
         return modelMapper.map(offerRepository.findById(id), OfferDto.class);
     }
-
     @Override
+    @CacheEvict(cacheNames = "offers", allEntries = true)
     public void deleteById(String id) {
         offerRepository.deleteById(id);
     }

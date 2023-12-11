@@ -65,6 +65,33 @@ public class MainController {
         model.addAttribute("currentUserId",currentUserId);
 
 
+
+// Cash test
+//        Long currentTime = System.currentTimeMillis();
+//        for (int i = 0; i < 1000; i++) {
+//            offerService.findAll();
+//        }
+//
+//        Long timeAfter = System.currentTimeMillis();
+//        System.out.println(timeAfter-currentTime);
+//
+//
+//
+//        Long currentTime2 = System.currentTimeMillis();
+//        for (int i = 0; i < 1000; i++) {
+//            offerService.findWithoutCash();
+//        }
+//
+//        Long timeAfter2 = System.currentTimeMillis();
+//        System.out.println(timeAfter2-currentTime2);
+
+
+
+
+
+
+
+
         return "index";
     }
 

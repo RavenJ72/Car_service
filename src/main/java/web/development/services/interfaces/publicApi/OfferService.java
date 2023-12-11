@@ -12,6 +12,7 @@ public interface OfferService<ID> {
     OfferDto save(OfferDto offer);  // Create/Update
 
     List<OfferOutputDto> findAll();  // Read
+    List<OfferOutputDto> findWithoutCash();  // Read
 
     OfferOutputDto findOfferDetailsById(String id);
 
