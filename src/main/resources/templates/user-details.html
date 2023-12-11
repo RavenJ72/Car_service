@@ -1,24 +1,81 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
 
 <head th:replace="~{blocks/headParams}">
 <body>
 <header th:replace="~{blocks/header}"></header>
 
-<div class="container">
-    <div class="card">
-        <img th:src="${user.imageUrl}" class="card-img-top" alt="Фотография"/>
-        <div class="card-body">
-            <p class="card-text" th:text="${user.username}"></p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="'ID:'  + ${user.id}"></li>
-                <li class="list-group-item" th:text="'Роль: ' + ${user.role_id}"></li>
-                <li class="list-group-item" th:text="'Подтвержденный профиль: ' + ${user.isActive.toString()}"></li>
-            </ul>
+<!--<div class="container">-->
+<!--    <div class="card">-->
+<!--        <img th:src="${user.imageUrl}" class="card-img-top" alt="Фотография"/>-->
+<!--        <div class="card-body">-->
+<!--            <p class="card-text" th:text="${user.username}"></p>-->
+<!--            <ul class="list-group list-group-flush">-->
+<!--                <li th:if="${check}" class="list-group-item" th:text="'ID:'  + ${user.id}"></li>-->
+<!--                <li th:if="${check}" class="list-group-item" th:text="'Роль: ' + ${user.role_id}"></li>-->
+<!--                <li class="list-group-item" th:text="'FirstName: ' + ${user.firstName}"></li>-->
+<!--                <li class="list-group-item" th:text="'LastName: ' + ${user.lastName}"></li>-->
+<!--                <li class="list-group-item" th:text="'Подтвержденный профиль: ' + ${user.isActive.toString()}"></li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <div class="card-footer d-flex justify-content-start">-->
+<!--            <a th:if="${check}" class="btn btn-success" th:href="@{/user/edit/{id}(id=${user.id})}">Edit profile</a>-->
+<!--            <form th:method="post" th:action="@{/logout}"  sec:authorize="hasAnyRole('USER')"  th:if="${check}" class="ml-2">-->
+<!--                <button  type="submit" class="btn btn-warning">Logout</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<div class="container d-flex justify-content-between">
+
+
+    <!-- Левая колонка для профиля -->
+    <div class="col-md-4">
+        <!-- Карточка профиля пользователя -->
+        <div class="card">
+            <img th:src="${user.imageUrl}" class="card-img-top" alt="Фотография"/>
+            <div class="card-body">
+                <p class="card-text" th:text="${user.username}"></p>
+                <ul class="list-group list-group-flush">
+                    <li th:if="${check}" class="list-group-item" th:text="'ID:'  + ${user.id}"></li>
+                    <li th:if="${check}" class="list-group-item" th:text="'Роль: ' + ${user.role_id}"></li>
+                    <li class="list-group-item" th:text="'FirstName: ' + ${user.firstName}"></li>
+                    <li class="list-group-item" th:text="'LastName: ' + ${user.lastName}"></li>
+                    <li class="list-group-item" th:text="'Подтвержденный профиль: ' + ${user.isActive.toString()}"></li>
+                </ul>
+            </div>
+            <div class="card-footer d-flex justify-content-start">
+                <a th:if="${check}" class="btn btn-success" th:href="@{/user/edit/{id}(id=${user.id})}">Edit profile</a>
+                <form th:method="post" th:action="@{/logout}" sec:authorize="hasAnyRole('USER')" th:if="${check}"
+                      class="ml-2">
+                    <button type="submit" class="btn btn-warning">Logout</button>
+                </form>
+            </div>
         </div>
-        <div class="card-footer">
-            <button type="submit"><a th:href="@{/user/edit/{id}(id=${user.id})}">Edit user</a></button>
+    </div>
+
+    <div class="row">
+        <!-- Правая колонка для офферов -->
+        <div class="col-md-8">
+            <div th:each="offer : ${offers}" class="card mb-3">
+                <!-- Карточка оффера -->
+                <a th:href="@{/offer/{id}(id=${offer.id})}" class="custom-link">
+                    <img th:src="${offer.imageUrl}" class="card-img-top" alt="Изображение автомобиля"/>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${offer.model.brand_name} + ' ' + ${offer.model.name}"></h5>
+                        <p class="card-text" th:text="${offer.description}"></p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" th:text="'Двигатель: ' + ${offer.engine}"></li>
+                            <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
+                        </ul>
+                        <span th:if="${offer.seller_id == currentUserId}" class="badge badge-primary">Мой Оффер</span>
+                    </div>
+                </a>
+            </div>
         </div>
+
     </div>
 </div>
 

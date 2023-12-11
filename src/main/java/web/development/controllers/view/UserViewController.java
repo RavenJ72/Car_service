@@ -2,6 +2,7 @@ package web.development.controllers.view;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.ParameterResolutionDelegate;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import web.development.services.interfaces.publicApi.BrandService;
 import web.development.services.interfaces.publicApi.ModelService;
 import web.development.services.interfaces.publicApi.OfferService;
 import web.development.services.interfaces.publicApi.UserService;
+
+import java.security.Principal;
 
 @Controller
 public class UserViewController {
@@ -50,47 +53,30 @@ public class UserViewController {
     }
 
     @GetMapping("/user/{id}")
-    public String offerDetails(@PathVariable("id") String id, Model model){
+    public String offerDetails(@PathVariable("id") String id, Model model, Principal principal){
 
         model.addAttribute("title","Car Service - User details page");
         model.addAttribute("user",userService.findUserDetailsById(id));
+        UserDto currentUser = userService.findByUsername(principal.getName());
+        model.addAttribute("check",currentUser.getId().equals(id) || currentUser.getRole().equals("ADMIN"));
+
+
 
         return "user-details";
     }
 
-    @GetMapping("/user/add/")
-    public String addUser(Model model){
-
-        return "user-add";
-    }
-    @ModelAttribute("userDto")
-    public UserDto initUserDtoModel() {
-        return new UserDto();
-    }
-
-    @PostMapping("/user/add/")
-    public String addUser(@Valid UserDto userDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        userDto.setIsActive(false);
-        userDto.setRole("USER");
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userDto", userDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userDto", bindingResult);
-
-            return "redirect:/user/add/";
-        }
-        userService.save(userDto);
-        return "redirect:/user/";
-    }
-
-
 
 
     @GetMapping("/user/edit/{id}")
-    public String editUser(@PathVariable("id") String id,Model model){
-        model.addAttribute("userDto",userService.findUserForEdit(id));
-        return "user-edit";
+    public String editUser(@PathVariable("id") String id,Model model,Principal principal){
+
+        UserDto userDto = userService.findUserForEdit(id);
+        if(userDto.getRole().equals("ADMIN") | userService.findByUsername(principal.getName()).getId().equals(id)){
+            model.addAttribute("userDto",userDto);
+            return "user-edit";
+        }
+        return "redirect:/error_not_found";
+
     }
     @PostMapping("/user/edit/{id}")
     public String editUser(@Valid UserDto userDto, @PathVariable("id") String id, BindingResult bindingResult, RedirectAttributes redirectAttributes) {

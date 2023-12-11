@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{blocks/headParams}">
 </head>
@@ -100,14 +100,14 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label for="user-select">Seller</label>
-                <select th:field="*{seller}" class="form-control" id="user-select" name="user">
-                    <div th:each="user : ${users}">
-                        <option th:value="${user.username}" th:text="${user.username}"></option>
-                    </div>
-                </select>
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <label for="user-select">Seller</label>-->
+<!--                <select th:field="*{seller}" class="form-control" id="user-select" name="user">-->
+<!--                    <div th:each="user : ${users}">-->
+<!--                        <option th:value="${user.username}" th:text="${user.username}"></option>-->
+<!--                    </div>-->
+<!--                </select>-->
+<!--            </div>-->
 
 
 

@@ -19,6 +19,7 @@ public interface UserService<ID> {
     UserDto findUserForEdit(String id);
 
     UserOutputDto findUserDetailsById(String id);
+    UserOutputDto findUserDetailsByUsername(String username);
 
     List<UserOutputDto> findUsersByActivity(Boolean isActive);
 }

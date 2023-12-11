@@ -48,7 +48,6 @@ public class OfferServiceImpl implements OfferService<String>, OfferInternalServ
                 if (offerDto.getId() != null){
                     Offer offerEditObject = offerRepository.findById(offerDto.getId()).orElse(null);
                     offerEditObject.setModel(modelRepository.findById(offerDto.getModel()).orElse(null));
-                    offerEditObject.setSeller(userRepository.findByUsername(offerDto.getSeller()).orElse(null));
                     offerEditObject.setDescription(offerDto.getDescription());
                     offerEditObject.setImageUrl(offerDto.getImageUrl());
 

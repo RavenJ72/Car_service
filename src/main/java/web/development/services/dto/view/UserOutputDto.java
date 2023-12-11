@@ -8,14 +8,34 @@ public class UserOutputDto extends BaseEntityDto {
     public String username;
     public Boolean isActive;
 
+    private String firstName;
+    private String lastName;
     public String imageUrl;
     public String role_id;
 
-    public UserOutputDto(String username, Boolean isActive, String imageUrl, String role_id) {
+    public UserOutputDto(String username, Boolean isActive, String firstName, String lastName, String imageUrl, String role_id) {
         this.username = username;
         this.isActive = isActive;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.imageUrl = imageUrl;
         this.role_id = role_id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public UserOutputDto() {

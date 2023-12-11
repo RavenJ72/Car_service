@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ru">
 
 <head th:replace="~{blocks/headParams}">
 <body>
@@ -18,10 +18,15 @@
                 <li class="list-group-item" th:text="'Пробег: ' + ${offer.mileage} + ' км'"></li>
                 <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
             </ul>
+            <span th:if="${offer.seller_id == currentUserId}" class="badge badge-primary">Мой Оффер</span>
+
         </div>
-        <div class="card-footer">
-            <small class="text-muted" th:text="'Продавец ID: ' + ${offer.seller_id}"></small>
-            <button type="submit"><a th:href="@{/offer/edit/{id}(id=${offer.id})}">Edit offer</a></button>
+        <div class="card-footer d-flex justify-content-between">
+
+            <button sec:authorize="hasAnyRole('USER')" th:if="${offer.seller_id == currentUserId}" type="submit" class="btn btn-success"><a th:href="@{/offer/edit/{id}(id=${offer.id})}" >Edit offer</a></button>
+            <button th:href="@{/offer/edit/{id}(id=${offer.id})}" sec:authorize="hasAnyRole('ADMIN')" type="submit" class="btn btn-success"><a th:href="@{/offer/edit/{id}(id=${offer.id})}">Edit offer</a></button>
+            <button class="btn btn-success"><a th:href="@{/user/{id}(id=${offer.seller_id})}" class="custom-link">Продавец</a></button>
+
         </div>
     </div>
 </div>

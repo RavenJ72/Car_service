@@ -35,11 +35,11 @@ public class SecurityConfiguration {
                                 authorizeHttpRequests.
                                         requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                                         .permitAll().
-                                        requestMatchers("/", "/login", "/register", "/login-error")
+                                        requestMatchers("/", "/login", "/register", "/login-error","/error_not_found")
                                         .permitAll().
-                                        requestMatchers("/users/profile").authenticated().
-                                        requestMatchers("/employees/add", "/employees/employee-delete/").hasRole("ADMIN").
-                                        requestMatchers("/companies/add","/companies/company-delete/","/employees/add", "/employees/employee-delete/").hasRole("ADMIN").
+                                        requestMatchers("/user/profile").authenticated().
+                                        requestMatchers("/user/","/user/add/").hasRole("ADMIN").
+                                        requestMatchers("/model/add/","/brand/add/").hasRole("ADMIN").
                                         anyRequest().authenticated()
                 )
                 .formLogin(

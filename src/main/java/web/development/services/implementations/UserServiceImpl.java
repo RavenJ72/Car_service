@@ -106,6 +106,12 @@ public class UserServiceImpl implements UserService<String>, UserInternalService
     }
 
     @Override
+    public UserOutputDto findUserDetailsByUsername(String username) {
+        return modelMapper.map(userRepository.findByUsername(username).orElse(null),UserOutputDto.class);
+
+    }
+
+    @Override
     public List<UserOutputDto> findUsersByActivity(Boolean isActive) {
         return userRepository.findByIsActive(isActive).stream().map(e -> modelMapper.map(e, UserOutputDto.class)).collect(Collectors.toList());
     }

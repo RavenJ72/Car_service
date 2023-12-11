@@ -11,6 +11,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import web.development.models.entities.Model;
 import web.development.models.entities.Offer;
 import web.development.models.entities.User;
+import web.development.services.dto.input.OfferDto;
 import web.development.services.dto.input.UserDto;
 import web.development.services.dto.view.ModelOutputDto;
 import web.development.services.dto.view.OfferOutputDto;
@@ -37,6 +38,9 @@ public class ApplicationBeanConfiguration {
         // OfferOutputDto
         TypeMap<Offer, OfferOutputDto> typeMapOfferDetails = modelMapper.createTypeMap(Offer.class, OfferOutputDto.class);
         typeMapOfferDetails.addMappings(m->m.map(src -> src.getSeller().getId(), OfferOutputDto::setSeller_id));
+
+        TypeMap<Offer, OfferDto> typeMapOfferDto = modelMapper.createTypeMap(Offer.class, OfferDto.class);
+        typeMapOfferDto.addMappings(m->m.map(src -> src.getSeller().getId(), OfferDto::setSeller));
 
 
         // UserOutPutDto

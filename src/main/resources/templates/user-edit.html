@@ -16,15 +16,15 @@
               th:object="${userDto}"
               class="m-md-auto w-50 pb-3">
 
-            <div class="mb-3">
-                <label class="form-label" for="username">Username</label>
-                <input th:field="*{username}"
-                       th:errorclass="is-invalid"
-                       type="text" class="form-control text-center"
-                       id="username" aria-describedby="username"/>
-                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
-                       class="text-danger"></small>
-            </div>
+<!--            <div class="mb-3">-->
+<!--                <label class="form-label" for="username">Username</label>-->
+<!--                <input th:field="*{username}"-->
+<!--                       th:errorclass="is-invalid"-->
+<!--                       type="text" class="form-control text-center"-->
+<!--                       id="username" aria-describedby="username"/>-->
+<!--                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}"-->
+<!--                       class="text-danger"></small>-->
+<!--            </div>-->
 
             <div class="mb-3">
                 <label class="form-label" for="password">Password</label>

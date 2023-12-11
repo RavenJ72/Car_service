@@ -74,6 +74,8 @@
                     <li class="list-group-item" th:text="'Двигатель: ' + ${offer.engine}"></li>
                     <li class="list-group-item" th:text="'Цена: ' + ${offer.price} + ' ₽'"></li>
                 </ul>
+                <span th:if="${offer.seller_id == currentUserId}" class="badge badge-primary">Мой Оффер</span>
+
             </div>
         </a>
     </div>

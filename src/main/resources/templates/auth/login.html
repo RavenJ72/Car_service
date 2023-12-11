@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="~{blocks/headParams}"></head>
 
-    <head th:insert="blocks/headParams :: headParams">
-
-
-
-
-</head>
 <body>
-
+<header th:replace="~{blocks/header}"></header>
 <section class="vh-100">
     <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                     class="img-fluid" alt="Sample image">
+                <img th:src="@{/images/Car.png}"
+                     class="img-fluid custom-img-size" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                 <div class="justify-content-center">
@@ -42,20 +36,17 @@
                     <p class="text-danger" th:if="${badCredentials}">
                         Invalid username or password.
                     </p>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-secondary">Login</button>
+                        <a href="/register"> <button type="button" class="btn btn-info ">Register</button></a>
+                    </div>
 
-                    <button type="submit" class="btn btn-secondary">Login</button>
                 </form>
+
             </div>
         </div>
     </div>
+
 </section>
-
-
-
-
-
-
-
-
 </body>
 </html>
