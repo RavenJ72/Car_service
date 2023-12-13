@@ -1,6 +1,10 @@
 package web.development.controllers.view;
 
 import jakarta.validation.Valid;
+import lombok.extern.java.Log;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -25,6 +29,8 @@ public class MainController {
     private BrandService brandService;
     private ModelService modelService;
     private UserService userService;
+
+    private static final Logger LOG = LogManager.getLogger(Controller.class);
 
     @Autowired
     public void setBrandService(BrandService brandService) {
@@ -180,6 +186,8 @@ public class MainController {
         model.addAttribute("check","true");
         model.addAttribute("currentUserId",userService.findByUsername(username).getId());
         model.addAttribute("offers",offerService.findOffersBySellerUsername(username));
+
+        LOG.log(Level.INFO,"Showing profile info for " + username);
 
         return "user-details";
     }
