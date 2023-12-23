@@ -71,15 +71,14 @@ public class MainController {
         model.addAttribute("currentUserId",currentUserId);
 
 
-
-// Cash test
+//        System.out.println("Cash test");
 //        Long currentTime = System.currentTimeMillis();
 //        for (int i = 0; i < 1000; i++) {
 //            offerService.findAll();
 //        }
 //
 //        Long timeAfter = System.currentTimeMillis();
-//        System.out.println(timeAfter-currentTime);
+//        System.out.printf("Время 1к запросов в базу с кешем: " + String.valueOf(timeAfter-currentTime) + " мс\n");
 //
 //
 //
@@ -89,14 +88,10 @@ public class MainController {
 //        }
 //
 //        Long timeAfter2 = System.currentTimeMillis();
-//        System.out.println(timeAfter2-currentTime2);
+//        System.out.printf("Время 1к запросов в базу без кеша: " + String.valueOf(timeAfter2-currentTime2)+ " мс\n");
+//
 
-
-
-
-
-
-
+        
 
         return "index";
     }
@@ -109,6 +104,8 @@ public class MainController {
         String userId = userService.findByUsername(principal.getName()).getId();
 
         model.addAttribute("currentUserId",userId);
+
+
         return "offer-details";
     }
 
@@ -141,7 +138,7 @@ public class MainController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerDto", bindingResult);
             return "redirect:/offer/add/";
         }
-
+        LOG.log(Level.INFO,"Offer added");
         offerService.save(offerDto);
         return "redirect:/";
     }
@@ -164,6 +161,8 @@ public class MainController {
             model.addAttribute("users",userService.findAll());
             return "offer-edit";
         }
+        LOG.log(Level.ERROR,"Access error, user " + userDto.getUsername() +  " have been redirected from edit page.");
+
         return "redirect:/error_not_found";
     }
     @PostMapping("/offer/edit/{id}")
@@ -174,7 +173,9 @@ public class MainController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.offerDto", bindingResult);
             return "redirect:/offer/edit/" + id;
         }
-        System.out.println(offerDtoModified);
+
+        LOG.log(Level.INFO,"Profile with id " + id + " edited.");
+
         offerService.save(offerDtoModified);
         return "redirect:/offer/" + id;
     }
